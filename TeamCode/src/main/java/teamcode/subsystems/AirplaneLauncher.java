@@ -35,7 +35,7 @@ public class AirplaneLauncher
         this.robot = robot;
         launcherMotor = new FtcDcMotor(instanceName + ".motor");
         launcherMotor.setMotorInverted(RobotParams.LAUNCHER_MOTOR_INVERTED);
-        launcherMotor.setPositionSensorScaleAndOffset(RobotParams.LAUNCH_REV_PER_COUNT, 0.0); //what is this doing
+        launcherMotor.setPositionSensorScaleAndOffset(RobotParams.LAUNCH_REV_PER_COUNT, 0.0);
         launcherServo = new FtcServo(instanceName + ".servo");
         launcherServo.setInverted(RobotParams.LAUNCHER_SERVO_INVERTED);
         launchTaskObj = TrcTaskMgr.createTask(instanceName + ".task", this::launchTask);
