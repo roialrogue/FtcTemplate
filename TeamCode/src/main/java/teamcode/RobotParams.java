@@ -113,8 +113,7 @@ public class RobotParams
     public static final String HWNAME_LBSTEER_ENCODER           = "lbSteerEncoder";
     public static final String HWNAME_RBSTEER_ENCODER           = "rbSteerEncoder";
     // Subsystems.
-    public static final String HWNAME_INTAKE_LEFT               = "CS0";
-    public static final String HWNAME_INTAKE_RIGHT              = "CS2";
+    public static final String HWNAME_INTAKE                    = "Intake"; //cs0 = Intake.leftServo cs2 = Intake.leftRight
     public static final String HWNAME_LAUNCHER_SERVO            = "CS4";
     public static final String HWNAME_LAUNCHER_MOTOR            = "EM2";
 
@@ -303,6 +302,7 @@ public class RobotParams
     //
     public static final boolean INTAKE_SERVO_LEFT_INVERTED     = false;
     public static final boolean INTAKE_SERVO_RIGHT_INVERTED    = false;
+    public static final double INTAKE_SERVO_TIME = 0.40;
     public static final double INTAKE_SERVO_LEFT_MIN_POS       = 0.65;
     public static final double INTAKE_SERVO_LEFT_MAX_POS       = 0.95;
     public static final double INTAKE_SERVO_RIGHT_MIN_POS       = 0.52;

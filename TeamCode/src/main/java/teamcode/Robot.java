@@ -37,6 +37,7 @@ import teamcode.drivebases.MecanumDrive;
 import teamcode.drivebases.RobotDrive;
 import teamcode.drivebases.SwerveDrive;
 import teamcode.subsystems.BlinkinLEDs;
+import teamcode.subsystems.Intake;
 import teamcode.vision.Vision;
 
 /**
@@ -68,6 +69,7 @@ public class Robot
     // Subsystems.
     //
     public RobotDrive robotDrive;
+    public Intake intake;
 
     /**
      * Constructor: Create an instance of the object.
@@ -125,6 +127,9 @@ public class Robot
             //
             if (RobotParams.Preferences.useSubsystems)
             {
+                if (RobotParams.Preferences.useIntake) {
+                    intake = new Intake(RobotParams.HWNAME_INTAKE, this);
+                }
             }
         }
 
@@ -281,6 +286,10 @@ public class Robot
             //
             // Display other subsystem status here.
             //
+            if (intake != null) {
+                dashboard.displayPrintf(
+                        lineNum++, "Intake: leftClawClosed=" + intake.isLeftClawClosed() + ", rightClawClosed=" + intake.isRightClawClosed());
+            }
         }
     }   //updateStatus
 
@@ -321,3 +330,5 @@ public class Robot
     }   //speak
 
 }   //class Robot
+
+

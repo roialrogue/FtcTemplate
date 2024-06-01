@@ -35,6 +35,7 @@ import TrcCommonLib.trclib.TrcTimer;
 import TrcFtcLib.ftclib.FtcGamepad;
 import TrcFtcLib.ftclib.FtcOpMode;
 import teamcode.drivebases.SwerveDrive;
+import teamcode.subsystems.Intake;
 
 /**
  * This class contains the TeleOp Mode program.
