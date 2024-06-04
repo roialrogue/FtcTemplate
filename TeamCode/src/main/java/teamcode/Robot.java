@@ -299,7 +299,7 @@ public class Robot
             }
             if(launcher != null)
             {
-                dashboard.displayPrintf(lineNum++, "Launcher: Servo=" + intake.);
+                dashboard.displayPrintf(lineNum++, "Launcher: Servo=" + AirplaneLauncher.isServoLaunchedPos);
             }
         }
     }   //updateStatus
