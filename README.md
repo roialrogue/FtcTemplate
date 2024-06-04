@@ -27,7 +27,7 @@ In addition, there are a few more buttons on the driver gamepad that modify how 
 ### Making Drive Base Odometry Work
 Our library supports both drive wheel motor odometry (using drive wheel motor encoders) and passive wheel odometry (aka dead-wheel odometry or odo pods). To select which odometry to use, change RobotParams.Preferences.useExternalOdometry to true to use passive wheel odometry or false to use drive wheel motor odometry. When using odo pods, you need to provide the odo pod placement info relative to the robot's centroid (*_ODWHEEL_*_OFFSET in RobotParams). To determine the robot's centroid, draw a rectangle with each drive wheel being the corners of the rectangle. The centroid is the center point of this rectangle. It is very important to provide accurate distance offsets of each odo pod wheel to the robot centroid because this affects the accuracy of the odometry calculation. We recommend measuring the offset distances from the CAD model if possible. Measuring the offset distances by hand introduces a lot of error and therefore not recommended. Our library uses ENU (East-North-Up) coordinate system for the robot which means robot centroid on the ground is the origin with X-axis pointing to robot right, Y-axis pointing to robot forward and Z-axis pointing up. Therefore the left odo pod will have a negative x-offset from robot centroid and the right odo pod will have a positive x-offset from robot centroid and so on. Even though our library supports 2 to 4 odo pods, the template code assumes you are using 3 odo pods, 2 pointing forward, typically one on the left and one on the right (Y-axis) and one pointing sideway (X-axis). Our library uses gyro (IMU) to keep track of the robot heading. In theory, it could use the odo pods to calculate the robot's heading but gyro is much more accurate than using odo pods.
 
-The next step is to determine the odometry scales (X and Y). This is applicable for both drive wheel motor odometry and odo pods. Generally, encoders give you values in the unit of counts (or ticks). To be more useful, we would like the odometry values to be in real world units such as inches or meters. Our library will scale the odometry to the unit of your choice. There are two ways to determine the odometry scales, one is to calculate it by providing info such as odo wheel diameter, encoder CPR (Count-Per-Revolution) etc. See RobotParams.ODO_WHEEL_* and RobotParams.*POS_INCHES_PER_COUNT. Another way is to calibrate the scales empiracally. This can be done by first setting the X and Y scales to 1 so that the reported units are unscaled and therefore in terms of encoder counts. Then, reset all the encoders and manually drive the robot in either the X or Y direction for a distance when calibrating X or Y scales. Measure the distance traveled. Then scale = distanceTraveled / unscaledCount. To minimize calibration error, drive a longer distance (at least 6 to 8 feet). Then update the *_INCHES_PER_COUNT variables with the calculated scale. Repeat the calibration again to check if the reading is within some tolerance of the actual measurement. If not, calculate the new scale by newScale = oldScale * actualValue / reportedValue. Repeat this process until the reported value is within some tolerance of the actual measurement. Once you have the odometry scales calibrated, you should be able to drive the robot around and odometry will keep track of the robot location on the field relative to its start location.
+The next step is to determine the odometry scales (X and Y). This is applicable for both drive wheel motor odometry and odo pods. Generally, encoders give you values in the unit of counts (or ticks). To be more useful, we would like the odometry values to be in real world units such as inches or meters. Our library will scale the odometry to the unit of your choice. There are two ways to determine the odometry scales, one is to calculate it by providing info such as odo wheel diameter, encoder CPR (Count-Per-Revolution) etc. See RobotParams.ODO_WHEEL_* and RobotParams.*POS_INCHES_PER_COUNT. Another way is to calibrate the scales empiracally. This can be done by first setting the X and Y scales to 1 so that the reported units are unscaled and therefore in the unit of encoder counts. Then, reset all the encoders and manually drive the robot in either the X or Y direction for a distance when calibrating X or Y scales. Measure the distance traveled. Then scale = distanceTraveled / unscaledCount. To minimize calibration error, drive a longer distance (at least 6 to 8 feet). Then update the *_INCHES_PER_COUNT variables with the calculated scale. Repeat the calibration again to check if the reading is within some tolerance of the actual measurement. If not, calculate the new scale by newScale = oldScale * actualValue / reportedValue. Repeat this process until the reported value is within some tolerance of the actual measurement. Once you have the odometry scales calibrated, you should be able to drive the robot around and odometry will keep track of the robot location on the field relative to its start location.
 
 ### Creating Subsystems
 Once the drive base is fully functional, the next step is to create subsystems for the robot such as Elevator, Arm, Intake, Grabber etc. It is a good practice to create subsystems as separate Java classes that encapsulate all hardware related to those subsystems. To create a subsystem, follow the steps below:
@@ -35,7 +35,7 @@ Once the drive base is fully functional, the next step is to create subsystems f
    ```
    public class Slide
    {
-       public final TrcMotor slideMotor;
+       private final TrcMotor slideMotor;
 
        /**
         * Constructor: Creates an instance of the object.
@@ -81,11 +81,11 @@ Once the drive base is fully functional, the next step is to create subsystems f
        slide = new Slide().getSlideMotor();
    }
    ```
-4. In RobotParams.java, add a Preferences that can turn the subsystem ON or OFF. This is very useful when developing code for an unfinished robot where some subsystem may or may not exist yet.
+4. In RobotParams.java, add a Preferences that can turn the subsystem ON or OFF. This is very useful when developing code for an unfinished robot where some subsystems may or may not exist yet.
    ```
    public static boolean useSlide = true;
    ```
-5. In RobotParams.java, add a HWNAME for the subsystem. This will become either the name or name prefix for the hardware in the robot configuration (e.g. slide.motor, slide.lowerLimit).
+5. In RobotParams.java, add a HWNAME for the subsystem. This will become either the name or name prefix for the hardware in the robot configuration (e.g. slide.motor, slide.lowerLimitSw etc).
    ```
    public static final String HWNAME_SLIDE = "slide";
    ```
@@ -137,8 +137,10 @@ Once the drive base is fully functional, the next step is to create subsystems f
            ", lowerLimit=" + slide.isLowerLimitSwitchActive());
    }
    ```
-8. In FtcTeleOp.java, add code to the method periodic to read analog controls on the gamepad for controlling the subsystem.
+8. In FtcTeleOp.java, add a private class variable slidePrevPower and add code to the method periodic to read analog controls on the gamepad for controlling the subsystem.
    ```
+   private double slidePrevPower = 0.0;
+   ...
    if (robot.slide != null)
    {
        double slidePower = operatorGamepad.getLeftStickY(true) * RobotParams.SLIDE_POWER_LIMIT;
@@ -159,7 +161,7 @@ Once the drive base is fully functional, the next step is to create subsystems f
        }
    }
    ```
-9. In FtcTeleOp.java, add code to the method operatorButtonEvent to read button controls on the gamepad for controlling the subsystem.
+9. In FtcTeleOp.java, add code to the method operatorButtonEvent to read button controls on the gamepad for controlling the subsystem. The following example shows how you would control the slide to extend or retract to the next preset position by using the DPad on the operator gamepad as well as using the BACK button to zero calibrate the slide.
    ```
    case FtcGamepad.GAMEPAD_DPAD_UP:
        if (pressed && robot.slide != null)
@@ -185,6 +187,7 @@ Once the drive base is fully functional, the next step is to create subsystems f
        }
        break;
    ```
+Once the subsystem is created and tied in to TeleOp, you should be able to operate the subsystem in TeleOp mode and check out the subsystem status on the Driver Station.
 
 ## TRC Framework Library Features
 Our Framework Library provides numerous features. We will list some of them here:
