@@ -384,14 +384,36 @@ public class FtcTeleOp extends FtcOpMode
                 break;
 
             case FtcGamepad.GAMEPAD_Y:
+                robot.globalTracer.traceInfo(moduleName, ">>>>> ManulOverride=" + pressed);
+                manualOverride = pressed;
                 break;
 
             case FtcGamepad.GAMEPAD_LBUMPER:
+                if(robot.intake != null)
+                {
+                    if(pressed)
+                    {
+                        robot.intake.openLeft(null);
+                    }
+                    else
+                    {
+                        robot.intake.closeLeft(null);
+                    }
+                }
                 break;
 
             case FtcGamepad.GAMEPAD_RBUMPER:
-                robot.globalTracer.traceInfo(moduleName, ">>>>> ManulOverride=" + pressed);
-                manualOverride = pressed;
+                if(robot.intake != null)
+                {
+                    if(pressed)
+                    {
+                        robot.intake.openRight(null);
+                    }
+                    else
+                    {
+                        robot.intake.closeRight(null);
+                    }
+                }
                 break;
 
             case FtcGamepad.GAMEPAD_DPAD_UP:
