@@ -114,7 +114,7 @@ public class RobotParams
     public static final String HWNAME_RBSTEER_ENCODER           = "rbSteerEncoder";
     // Subsystems.
     public static final String HWNAME_INTAKE                    = "Intake"; //cs0 = Intake.leftServo cs2 = Intake.rightServo
-    public static final String HWNAME_LAUNCHER                  = "Launcher"; //cs4 = Launcher.motor EM2 = Launcher.servo
+    public static final String HWNAME_LAUNCHER                  = "Launcher"; //EM2 = Launcher.motor CS4 = Launcher.servo
 
 
     //
