@@ -79,7 +79,7 @@ public class RobotParams
         // Subsystems
         public static boolean useSubsystems = true;
         public static boolean useIntake = true;
-        public static boolean useLauncher = false;
+        public static boolean useLauncher = true;
     }   //class Preferences
 
     public static final String ROBOT_NAME                       = "Robotxxxx";
@@ -114,7 +114,7 @@ public class RobotParams
     public static final String HWNAME_RBSTEER_ENCODER           = "rbSteerEncoder";
     // Subsystems.
     public static final String HWNAME_INTAKE                    = "Intake"; //cs0 = Intake.leftServo cs2 = Intake.rightServo
-    public static final String HWNAME_LAUNCHER                  = "Launcher"; //EM2 = Launcher.motor CS4 = Launcher.servo
+    public static final String HWNAME_LAUNCHER                  = "Launcher"; //Launcher.motor cs4 = Launcher.servo
 
 
     //
@@ -313,7 +313,7 @@ public class RobotParams
     public static final boolean LAUNCHER_SERVO_INVERTED        = false;
     public static final double LAUNCHER_REV_PER_COUNT          = 1/103.8;
     public static final double LAUCNHER_TRIGGER_TIME           = 1;
-    public static final double LAUNCH_VELOCITY                 = 100;
+    public static final double LAUNCH_VELOCITY                 = 270000; //max 315,000
     public static final double LAUNCHER_SERVO_MIN_POS          = 0.30;
     public static final double LAUNCHER_SERVO_MAX_POS          = 0.18;
 

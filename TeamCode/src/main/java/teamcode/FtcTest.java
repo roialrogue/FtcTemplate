@@ -60,8 +60,8 @@ public class FtcTest extends FtcTeleOp
     private static final String moduleName = FtcTest.class.getSimpleName();
     private static final boolean logEvents = true;
     private static final boolean debugPid = true;
-    private static final double LAUNCHER_POWER_STEP = 1;
-    protected double launchVelocity = RobotParams.LAUNCH_VELOCITY;
+    private static final double LAUNCHER_POWER_STEP = 1000;
+    private double launchVelocity = RobotParams.LAUNCH_VELOCITY;
 
     private enum Test
     {
@@ -621,10 +621,8 @@ public class FtcTest extends FtcTeleOp
                 }
                 else if (testChoices.test == Test.TUNE_LAUNCHER_POWER && robot.launcher != null)
                 {
-                    robot.launcher.launcherMotor.setPower(1);
-
-//                    robot.launcher.launcherMotor.setVelocity(pressed ? launchVelocity : 0.0); //?/?
-//                    passToTeleOp = false;
+                    robot.launcher.launcherMotor.setVelocity(pressed ? launchVelocity : 0.0); //?/?
+                    passToTeleOp = false;
                 }
                 break;
 
@@ -712,7 +710,7 @@ public class FtcTest extends FtcTeleOp
                     if(pressed)
                     {
                         launchVelocity += LAUNCHER_POWER_STEP;
-                        //if (launchVelocity > 1.0) launchVelocity = 1.0;
+                        if (launchVelocity > 315000) launchVelocity = 315000;
                     }
                     passToTeleOp = false;
                 }
@@ -748,7 +746,7 @@ public class FtcTest extends FtcTeleOp
                     if(pressed)
                     {
                         launchVelocity -= LAUNCHER_POWER_STEP;
-                        //if (launchVelocity > 0.0) launchVelocity = 0.0;
+                        if (launchVelocity > 0.0) launchVelocity = 0.0;
                     }
                     passToTeleOp = false;
                 }

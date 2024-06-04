@@ -294,8 +294,8 @@ public class Robot
             // Display other subsystem status here.
             //
             if (intake != null) {
-//                dashboard.displayPrintf(
-//                        lineNum++, "Intake: leftClawClosed=" + intake.isLeftClawClosed() + ", rightClawClosed=" + intake.isRightClawClosed());
+                dashboard.displayPrintf(
+                        lineNum++, "Intake: leftClawClosed=" + intake.isLeftClawClosed() + ", rightClawClosed=" + intake.isRightClawClosed());
             }
             if(launcher != null)
             {
