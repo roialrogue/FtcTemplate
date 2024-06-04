@@ -79,7 +79,7 @@ public class RobotParams
         // Subsystems
         public static boolean useSubsystems = true;
         public static boolean useIntake = true;
-        public static boolean useLauncher = true;
+        public static boolean useLauncher = false;
     }   //class Preferences
 
     public static final String ROBOT_NAME                       = "Robotxxxx";
