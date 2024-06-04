@@ -111,7 +111,7 @@ public class AirplaneLauncher
                 case LAUNCH:
                     // Launch airplane.
                     launcherServo.setPosition(RobotParams.LAUNCHER_SERVO_MAX_POS, event, RobotParams.LAUCNHER_TRIGGER_TIME);
-                    ServoLaunchedPos = false;
+                    ServoLaunchedPos = true;
                     sm.waitForSingleEvent(event, State.DONE);
                     break;
 
