@@ -73,11 +73,13 @@ public class RobotParams
         public static boolean showVisionView = !inCompetition;
         public static boolean showVisionStat = false;
         // Drive Base
-        public static boolean useExternalOdometry = false;
+        public static boolean useExternalOdometry = true;
         public static boolean doSwervePhysicalAlignment = false;
         public static boolean swerveDualServoSteering = true;
         // Subsystems
-        public static boolean useSubsystems = false;
+        public static boolean useSubsystems = true;
+        public static boolean useIntake = true;
+        public static boolean useLauncher = true;
     }   //class Preferences
 
     public static final String ROBOT_NAME                       = "Robotxxxx";
@@ -111,6 +113,9 @@ public class RobotParams
     public static final String HWNAME_LBSTEER_ENCODER           = "lbSteerEncoder";
     public static final String HWNAME_RBSTEER_ENCODER           = "rbSteerEncoder";
     // Subsystems.
+    public static final String HWNAME_INTAKE                    = "Intake"; //cs0 = Intake.leftServo cs2 = Intake.rightServo
+    public static final String HWNAME_LAUNCHER                  = "Launcher"; //cs4 = Launcher.motor EM2 = Launcher.servo
+
 
     //
     // Field dimensions.
@@ -121,10 +126,10 @@ public class RobotParams
     //
     // Robot dimensions.
     //
-    public static final double ROBOT_LENGTH                     = 17.0;
-    public static final double ROBOT_WIDTH                      = 17.0;
-    public static final double DRIVE_BASE_LENGTH                = (24.0 * 14)*TrcUtil.INCHES_PER_MM;
-    public static final double DRIVE_BASE_WIDTH                 = 16.0;
+    public static final double ROBOT_LENGTH                     = 15.0;
+    public static final double ROBOT_WIDTH                      = 16.0;
+    public static final double DRIVE_BASE_LENGTH                = 246*TrcUtil.INCHES_PER_MM;
+    public static final double DRIVE_BASE_WIDTH                 = 16.0; // need to be changed
     //
     // Game related locations.
     //
@@ -240,16 +245,16 @@ public class RobotParams
     public static final double TURN_POWER_SCALE_SLOW            = 0.5;
     public static final double TURN_POWER_SCALE_NORMAL          = 1.0;
     // Optii Odometry Wheel:
-    public static final double ODWHEEL_DIAMETER                 = 35.0 * TrcUtil.INCHES_PER_MM;
-    public static final double ODWHEEL_CPR                      = 4096.0;
+    public static final double ODWHEEL_DIAMETER                 = 48 * TrcUtil.INCHES_PER_MM;
+    public static final double ODWHEEL_CPR                      = 2000;
     public static final double ODWHEEL_INCHES_PER_COUNT         = Math.PI*ODWHEEL_DIAMETER/ODWHEEL_CPR;
     // Scale = 0.00105687652708656383937269814237 inches/count
     public static final double YLEFT_ODWHEEL_X_OFFSET           = -144.0 * TrcUtil.INCHES_PER_MM;
     public static final double YLEFT_ODWHEEL_Y_OFFSET           = -12.0 * TrcUtil.INCHES_PER_MM;
     public static final double YRIGHT_ODWHEEL_X_OFFSET           = 144.0 * TrcUtil.INCHES_PER_MM;
     public static final double YRIGHT_ODWHEEL_Y_OFFSET          = -12.0 * TrcUtil.INCHES_PER_MM;
-    public static final double X_ODWHEEL_X_OFFSET               = 0.0;
-    public static final double X_ODWHEEL_Y_OFFSET               = -168.0 * TrcUtil.INCHES_PER_MM;
+    public static final double X_ODWHEEL_X_OFFSET               = -116.695 * TrcUtil.INCHES_PER_MM;
+    public static final double X_ODWHEEL_Y_OFFSET               = -44.7 * TrcUtil.INCHES_PER_MM;
     public static final FtcGamepad.DriveMode ROBOT_DRIVE_MODE   = FtcGamepad.DriveMode.ARCADE_MODE;
     //
     // Velocity controlled constants.
@@ -291,5 +296,25 @@ public class RobotParams
     public static final double PPD_POS_ERR_RATE_THRESHOLD       = 1.0;
     public static final double PPD_TURN_TOLERANCE               = 1.0;
     public static final double PPD_TURN_ERR_RATE_THRESHOLD      = 1.0;
+    //
+    // Intake Subsystem
+    //
+    public static final boolean INTAKE_SERVO_LEFT_INVERTED     = false;
+    public static final boolean INTAKE_SERVO_RIGHT_INVERTED    = false;
+    public static final double INTAKE_SERVO_TIME = 0.40;
+    public static final double INTAKE_SERVO_LEFT_MIN_POS       = 0.65;
+    public static final double INTAKE_SERVO_LEFT_MAX_POS       = 0.95;
+    public static final double INTAKE_SERVO_RIGHT_MIN_POS       = 0.52;
+    public static final double INTAKE_SERVO_RIGHT_MAX_POS       = 0.18;
+    //
+    // Airplane Launcher Subsystem
+    //
+    public static final boolean LAUNCHER_MOTOR_INVERTED        = true;
+    public static final boolean LAUNCHER_SERVO_INVERTED        = false;
+    public static final double LAUNCHER_REV_PER_COUNT          = 1/103.8;
+    public static final double LAUCNHER_TRIGGER_TIME           = 1;
+    public static final double LAUNCH_VELOCITY                 = 100;
+    public static final double LAUNCHER_SERVO_MIN_POS          = 0.30;
+    public static final double LAUNCHER_SERVO_MAX_POS          = 0.18;
 
 }   //class RobotParams

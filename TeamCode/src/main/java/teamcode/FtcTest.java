@@ -60,6 +60,7 @@ public class FtcTest extends FtcTeleOp
     private static final String moduleName = FtcTest.class.getSimpleName();
     private static final boolean logEvents = true;
     private static final boolean debugPid = true;
+    private static final double launchVelocity = 0.01;
 
     private enum Test
     {
@@ -76,7 +77,8 @@ public class FtcTest extends FtcTeleOp
         TUNE_Y_PID,
         TUNE_TURN_PID,
         PURE_PURSUIT_DRIVE,
-        CALIBRATE_SWERVE_STEERING
+        CALIBRATE_SWERVE_STEERING,
+        TUNE_LAUNCHER_POWER
     }   //enum Test
 
     /**
@@ -533,6 +535,9 @@ public class FtcTest extends FtcTeleOp
                         }
                     }
                     break;
+                case TUNE_LAUNCHER_POWER:
+                    robot.dashboard.displayPrintf(lineNum++, "LauncherVelocity=" + launchVelocity + ", vel=" + robot.launcher.getLaucnchMotorVelocity());
+                    robot.launcher.launcherMotor.setPower(1);
             }
         }
     }   //periodic
