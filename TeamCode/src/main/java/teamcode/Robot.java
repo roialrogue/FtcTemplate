@@ -36,6 +36,7 @@ import TrcFtcLib.ftclib.FtcRobotBattery;
 import teamcode.drivebases.MecanumDrive;
 import teamcode.drivebases.RobotDrive;
 import teamcode.drivebases.SwerveDrive;
+import teamcode.subsystems.AirplaneLauncher;
 import teamcode.subsystems.BlinkinLEDs;
 import teamcode.subsystems.Intake;
 import teamcode.vision.Vision;
@@ -70,6 +71,7 @@ public class Robot
     //
     public RobotDrive robotDrive;
     public Intake intake;
+    public AirplaneLauncher launcher;
 
     /**
      * Constructor: Create an instance of the object.
@@ -127,8 +129,13 @@ public class Robot
             //
             if (RobotParams.Preferences.useSubsystems)
             {
-                if (RobotParams.Preferences.useIntake) {
+                if (RobotParams.Preferences.useIntake)
+                {
                     intake = new Intake(RobotParams.HWNAME_INTAKE, this);
+                }
+                if(RobotParams.Preferences.useLauncher)
+                {
+                    launcher = new AirplaneLauncher(RobotParams.HWNAME_LAUNCHER, this);
                 }
             }
         }
@@ -289,6 +296,10 @@ public class Robot
             if (intake != null) {
                 dashboard.displayPrintf(
                         lineNum++, "Intake: leftClawClosed=" + intake.isLeftClawClosed() + ", rightClawClosed=" + intake.isRightClawClosed());
+            }
+            if(launcher != null)
+            {
+                dashboard.displayPrintf(lineNum++, "Launcher: Servo=" + intake.);
             }
         }
     }   //updateStatus

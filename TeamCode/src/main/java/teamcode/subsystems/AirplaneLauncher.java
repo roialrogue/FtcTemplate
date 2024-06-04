@@ -23,6 +23,7 @@ public class AirplaneLauncher
     private final Robot robot;
     private final FtcDcMotor launcherMotor;
     private final FtcServo launcherServo;
+    private boolean ServoLaunchedPos;
     private final TrcTaskMgr.TaskObject launchTaskObj;
     private final TrcEvent event;
     private final TrcStateMachine<State> sm;
@@ -35,12 +36,19 @@ public class AirplaneLauncher
         this.robot = robot;
         launcherMotor = new FtcDcMotor(instanceName + ".motor");
         launcherMotor.setMotorInverted(RobotParams.LAUNCHER_MOTOR_INVERTED);
-        launcherMotor.setPositionSensorScaleAndOffset(RobotParams.LAUNCH_REV_PER_COUNT, 0.0);
+        launcherMotor.setPositionSensorScaleAndOffset(RobotParams.LAUNCHER_REV_PER_COUNT, 0.0);
         launcherServo = new FtcServo(instanceName + ".servo");
         launcherServo.setInverted(RobotParams.LAUNCHER_SERVO_INVERTED);
         launchTaskObj = TrcTaskMgr.createTask(instanceName + ".task", this::launchTask);
         event = new TrcEvent(instanceName);
         sm = new TrcStateMachine<>(instanceName);
+        launcherServo.setPosition(RobotParams.LAUNCHER_SERVO_MIN_POS);
+        ServoLaunchedPos = false;
+    }
+
+    public boolean isServoLaunchedPos() {
+
+        return ServoLaunchedPos;
     }
 
     private void finish(boolean canceled)
@@ -50,6 +58,7 @@ public class AirplaneLauncher
             // Launch task is active, finish it.
             launcherMotor.stop();
             launcherServo.setPosition(RobotParams.LAUNCHER_SERVO_MIN_POS);
+            ServoLaunchedPos = false;
             sm.stop();
             launchTaskObj.unregisterTask();
             if (completionEvent != null)
@@ -101,7 +110,8 @@ public class AirplaneLauncher
 
                 case LAUNCH:
                     // Launch airplane.
-                    launcherServo.setPosition(RobotParams.LAUNCH_TRIGGER_POS, event, RobotParams.LAUCNH_TRIGGER_TIME);
+                    launcherServo.setPosition(RobotParams.LAUNCHER_SERVO_MAX_POS, event, RobotParams.LAUCNHER_TRIGGER_TIME);
+                    ServoLaunchedPos = false;
                     sm.waitForSingleEvent(event, State.DONE);
                     break;
 

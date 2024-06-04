@@ -23,6 +23,7 @@ public class Intake {
         intakeServoLeft.setInverted(RobotParams.INTAKE_SERVO_LEFT_INVERTED);
         intakeServoRight = new FtcServo(instanceName + ".rightServo");
         intakeServoRight.setInverted(RobotParams.INTAKE_SERVO_RIGHT_INVERTED);
+        openClaw(null);
     }
 
     public boolean isLeftClawClosed() {
