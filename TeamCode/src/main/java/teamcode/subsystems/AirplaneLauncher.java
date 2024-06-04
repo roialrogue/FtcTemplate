@@ -23,7 +23,6 @@ public class AirplaneLauncher
     private final Robot robot;
     private final FtcDcMotor launcherMotor;
     private final FtcServo launcherServo;
-    private boolean ServoLaunchedPos;
     private final TrcTaskMgr.TaskObject launchTaskObj;
     private final TrcEvent event;
     private final TrcStateMachine<State> sm;
@@ -43,12 +42,11 @@ public class AirplaneLauncher
         event = new TrcEvent(instanceName);
         sm = new TrcStateMachine<>(instanceName);
         launcherServo.setPosition(RobotParams.LAUNCHER_SERVO_MIN_POS);
-        ServoLaunchedPos = false;
     }
 
-    public boolean isServoLaunchedPos() {
+    public double servoLauncherPos() {
 
-        return ServoLaunchedPos;
+        return launcherServo.getPosition();
     }
 
     private void finish(boolean canceled)
@@ -58,7 +56,6 @@ public class AirplaneLauncher
             // Launch task is active, finish it.
             launcherMotor.stop();
             launcherServo.setPosition(RobotParams.LAUNCHER_SERVO_MIN_POS);
-            ServoLaunchedPos = false;
             sm.stop();
             launchTaskObj.unregisterTask();
             if (completionEvent != null)
@@ -111,7 +108,6 @@ public class AirplaneLauncher
                 case LAUNCH:
                     // Launch airplane.
                     launcherServo.setPosition(RobotParams.LAUNCHER_SERVO_MAX_POS, event, RobotParams.LAUCNHER_TRIGGER_TIME);
-                    ServoLaunchedPos = true;
                     sm.waitForSingleEvent(event, State.DONE);
                     break;
 
