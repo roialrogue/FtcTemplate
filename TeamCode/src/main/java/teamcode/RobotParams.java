@@ -220,8 +220,8 @@ public class RobotParams
 
     public static final boolean LFDRIVE_INVERTED                = true;
     public static final boolean RFDRIVE_INVERTED                = false;
-    public static final boolean LBDRIVE_INVERTED                = true;
-    public static final boolean RBDRIVE_INVERTED                = false;
+    public static final boolean LBDRIVE_INVERTED                = false;
+    public static final boolean RBDRIVE_INVERTED                = true;
     public static final boolean LFSTEER_INVERTED                = true;
     public static final boolean RFSTEER_INVERTED                = true;
     public static final boolean LBSTEER_INVERTED                = true;
