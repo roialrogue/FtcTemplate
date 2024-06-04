@@ -44,9 +44,14 @@ public class AirplaneLauncher
         launcherServo.setPosition(RobotParams.LAUNCHER_SERVO_MIN_POS);
     }
 
-    public double servoLauncherPos() {
-
+    public double servoLauncherPos()
+    {
         return launcherServo.getPosition();
+    }
+
+    public double getLaucnchMotorVelocity()
+    {
+        return launcherMotor.getVelocity();
     }
 
     private void finish(boolean canceled)
