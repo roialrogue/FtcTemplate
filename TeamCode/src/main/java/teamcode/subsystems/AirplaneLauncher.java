@@ -21,7 +21,7 @@ public class AirplaneLauncher
     private final TrcDbgTrace tracer;
     private final String instanceName;
     private final Robot robot;
-    private final FtcDcMotor launcherMotor;
+    public final FtcDcMotor launcherMotor; //change back to private
     private final FtcServo launcherServo;
     private final TrcTaskMgr.TaskObject launchTaskObj;
     private final TrcEvent event;
