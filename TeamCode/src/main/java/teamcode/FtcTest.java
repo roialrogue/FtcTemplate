@@ -60,7 +60,8 @@ public class FtcTest extends FtcTeleOp
     private static final String moduleName = FtcTest.class.getSimpleName();
     private static final boolean logEvents = true;
     private static final boolean debugPid = true;
-    private static final double launchVelocity = 0.01;
+    private static final double LAUNCHER_POWER_STEP = 1;
+    protected double launchVelocity = RobotParams.LAUNCH_VELOCITY;
 
     private enum Test
     {
@@ -537,7 +538,6 @@ public class FtcTest extends FtcTeleOp
                     break;
                 case TUNE_LAUNCHER_POWER:
                     robot.dashboard.displayPrintf(lineNum++, "LauncherVelocity=" + launchVelocity + ", vel=" + robot.launcher.getLaucnchMotorVelocity());
-                    robot.launcher.launcherMotor.setPower(1);
             }
         }
     }   //periodic
@@ -618,6 +618,13 @@ public class FtcTest extends FtcTeleOp
                     fpsMeterEnabled = !fpsMeterEnabled;
                     robot.vision.setFpsMeterEnabled(fpsMeterEnabled);
                     robot.globalTracer.traceInfo(moduleName, "fpsMeterEnabled = %s", fpsMeterEnabled);
+                }
+                else if (testChoices.test == Test.TUNE_LAUNCHER_POWER && robot.launcher != null)
+                {
+                    robot.launcher.launcherMotor.setPower(1);
+
+//                    robot.launcher.launcherMotor.setVelocity(pressed ? launchVelocity : 0.0); //?/?
+//                    passToTeleOp = false;
                 }
                 break;
 
@@ -700,6 +707,15 @@ public class FtcTest extends FtcTeleOp
                     }
                     passToTeleOp = false;
                 }
+                else if (testChoices.test == Test.TUNE_LAUNCHER_POWER && robot.launcher !=null)
+                {
+                    if(pressed)
+                    {
+                        launchVelocity += LAUNCHER_POWER_STEP;
+                        //if (launchVelocity > 1.0) launchVelocity = 1.0;
+                    }
+                    passToTeleOp = false;
+                }
                 break;
 
             case FtcGamepad.GAMEPAD_DPAD_DOWN:
@@ -724,6 +740,15 @@ public class FtcTest extends FtcTeleOp
                         // Decrement color threshold value.
                         colorThresholds[colorThresholdIndex] -= colorThresholdMultiplier;
                         updateColorThresholds();
+                    }
+                    passToTeleOp = false;
+                }
+                else if (testChoices.test == Test.TUNE_LAUNCHER_POWER && robot.launcher !=null)
+                {
+                    if(pressed)
+                    {
+                        launchVelocity -= LAUNCHER_POWER_STEP;
+                        //if (launchVelocity > 0.0) launchVelocity = 0.0;
                     }
                     passToTeleOp = false;
                 }
@@ -901,6 +926,7 @@ public class FtcTest extends FtcTeleOp
         testMenu.addChoice("Tune Turn PID", Test.TUNE_TURN_PID, false, tuneKpMenu);
         testMenu.addChoice("Pure Pursuit Drive", Test.PURE_PURSUIT_DRIVE, false);
         testMenu.addChoice("Calibrate Swerve Steering", Test.CALIBRATE_SWERVE_STEERING, false);
+        testMenu.addChoice("Tune Launcher Power", Test.TUNE_LAUNCHER_POWER, false);
 
         xTargetMenu.setChildMenu(yTargetMenu);
         yTargetMenu.setChildMenu(turnTargetMenu);

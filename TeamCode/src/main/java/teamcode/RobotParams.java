@@ -301,11 +301,11 @@ public class RobotParams
     //
     public static final boolean INTAKE_SERVO_LEFT_INVERTED     = false;
     public static final boolean INTAKE_SERVO_RIGHT_INVERTED    = false;
-    public static final double INTAKE_SERVO_TIME = 0.40;
+    public static final double INTAKE_SERVO_TIME               = 0.40;
     public static final double INTAKE_SERVO_LEFT_MIN_POS       = 0.65;
     public static final double INTAKE_SERVO_LEFT_MAX_POS       = 0.95;
-    public static final double INTAKE_SERVO_RIGHT_MIN_POS       = 0.52;
-    public static final double INTAKE_SERVO_RIGHT_MAX_POS       = 0.18;
+    public static final double INTAKE_SERVO_RIGHT_MIN_POS      = 0.52;
+    public static final double INTAKE_SERVO_RIGHT_MAX_POS      = 0.18;
     //
     // Airplane Launcher Subsystem
     //
