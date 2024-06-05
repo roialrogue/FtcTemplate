@@ -31,8 +31,8 @@ public class Hang
 //        );
     }
 
-    public TrcMotor getHangMotor()
-    {
+//    public TrcMotor getHangMotor()
+//    {
 //        return hangMotor;
-    }
+//    }
 }
