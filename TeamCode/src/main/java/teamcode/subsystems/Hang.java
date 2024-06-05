@@ -6,7 +6,7 @@ import teamcode.RobotParams;
 
 public class Hang
 {
-    private final TrcMotor hangMotor;
+//    private final TrcMotor hangMotor;
 
     public Hang()
     {
