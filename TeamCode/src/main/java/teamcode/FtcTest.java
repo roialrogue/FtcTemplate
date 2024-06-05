@@ -60,7 +60,7 @@ public class FtcTest extends FtcTeleOp
     private static final String moduleName = FtcTest.class.getSimpleName();
     private static final boolean logEvents = true;
     private static final boolean debugPid = true;
-    private static final double LAUNCHER_POWER_STEP = 1000;
+    private static final double LAUNCHER_VEL_STEP = 10;
     private double launchVelocity = RobotParams.LAUNCH_VELOCITY;
 
     private enum Test
@@ -79,7 +79,7 @@ public class FtcTest extends FtcTeleOp
         TUNE_TURN_PID,
         PURE_PURSUIT_DRIVE,
         CALIBRATE_SWERVE_STEERING,
-        TUNE_LAUNCHER_POWER
+        TUNE_LAUNCHER_VEL
     }   //enum Test
 
     /**
@@ -536,8 +536,10 @@ public class FtcTest extends FtcTeleOp
                         }
                     }
                     break;
-                case TUNE_LAUNCHER_POWER:
-                    robot.dashboard.displayPrintf(lineNum++, "LauncherVelocity=" + launchVelocity + ", vel=" + robot.launcher.getLaucnchMotorVelocity());
+                case TUNE_LAUNCHER_VEL:
+                    if (robot.launcher != null ) {
+                        robot.dashboard.displayPrintf(lineNum++, "LauncherVelocity=" + (robot.launcher.getLaucnchMotorVelocity() * 60.0) + "/" + launchVelocity);
+                    }
             }
         }
     }   //periodic
@@ -619,9 +621,9 @@ public class FtcTest extends FtcTeleOp
                     robot.vision.setFpsMeterEnabled(fpsMeterEnabled);
                     robot.globalTracer.traceInfo(moduleName, "fpsMeterEnabled = %s", fpsMeterEnabled);
                 }
-                else if (testChoices.test == Test.TUNE_LAUNCHER_POWER && robot.launcher != null)
+                else if (testChoices.test == Test.TUNE_LAUNCHER_VEL && robot.launcher != null)
                 {
-                    robot.launcher.launcherMotor.setVelocity(pressed ? launchVelocity : 0.0);
+                    robot.launcher.launcherMotor.setVelocity(pressed ? launchVelocity/60.0 : 0.0);
                     passToTeleOp = false;
                 }
                 break;
@@ -705,14 +707,9 @@ public class FtcTest extends FtcTeleOp
                     }
                     passToTeleOp = false;
                 }
-                else if (testChoices.test == Test.TUNE_LAUNCHER_POWER && robot.launcher !=null)
+                else if (testChoices.test == Test.TUNE_LAUNCHER_VEL && robot.launcher !=null)
                 {
-                    if(pressed)
-                    {
-                        launchVelocity += LAUNCHER_POWER_STEP;
-                        if (launchVelocity > 315000) launchVelocity = 315000;
-                    }
-                    passToTeleOp = false;
+                    if (launchVelocity > RobotParams.LAUNCHER_MAX_VEL) launchVelocity = RobotParams.LAUNCHER_MAX_VEL;
                 }
                 break;
 
@@ -741,11 +738,11 @@ public class FtcTest extends FtcTeleOp
                     }
                     passToTeleOp = false;
                 }
-                else if (testChoices.test == Test.TUNE_LAUNCHER_POWER && robot.launcher !=null)
+                else if (testChoices.test == Test.TUNE_LAUNCHER_VEL && robot.launcher !=null)
                 {
                     if(pressed)
                     {
-                        launchVelocity -= LAUNCHER_POWER_STEP;
+                        launchVelocity -= LAUNCHER_VEL_STEP;
                         if (launchVelocity < 0.0) launchVelocity = 0.0;
                     }
                     passToTeleOp = false;
@@ -924,7 +921,7 @@ public class FtcTest extends FtcTeleOp
         testMenu.addChoice("Tune Turn PID", Test.TUNE_TURN_PID, false, tuneKpMenu);
         testMenu.addChoice("Pure Pursuit Drive", Test.PURE_PURSUIT_DRIVE, false);
         testMenu.addChoice("Calibrate Swerve Steering", Test.CALIBRATE_SWERVE_STEERING, false);
-        testMenu.addChoice("Tune Launcher Power", Test.TUNE_LAUNCHER_POWER, false);
+        testMenu.addChoice("Tune Launcher Power", Test.TUNE_LAUNCHER_VEL, false);
 
         xTargetMenu.setChildMenu(yTargetMenu);
         yTargetMenu.setChildMenu(turnTargetMenu);
