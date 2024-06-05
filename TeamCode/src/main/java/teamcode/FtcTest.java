@@ -746,7 +746,7 @@ public class FtcTest extends FtcTeleOp
                     if(pressed)
                     {
                         launchVelocity -= LAUNCHER_POWER_STEP;
-                        if (launchVelocity > 0.0) launchVelocity = 0.0;
+                        if (launchVelocity < 0.0) launchVelocity = 0.0;
                     }
                     passToTeleOp = false;
                 }
