@@ -36,6 +36,7 @@ public class AirplaneLauncher
         launcherMotor = new FtcDcMotor(instanceName + ".motor");
         launcherMotor.setMotorInverted(RobotParams.LAUNCHER_MOTOR_INVERTED);
         launcherMotor.setPositionSensorScaleAndOffset(RobotParams.LAUNCHER_REV_PER_COUNT, 0.0);
+        launcherMotor.setVelocityPidTolerance(RobotParams.LAUNCHER_VEL_TOLERANCE / 60.0);
         launcherServo = new FtcServo(instanceName + ".servo");
         launcherServo.setInverted(RobotParams.LAUNCHER_SERVO_INVERTED);
         launchTaskObj = TrcTaskMgr.createTask(instanceName + ".task", this::launchTask);
@@ -106,7 +107,7 @@ public class AirplaneLauncher
             {
                 case START:
                     // Set launch motor velocity and wait for it to reach target speed.
-                    launcherMotor.setVelocity(0.0, RobotParams.LAUNCH_VELOCITY, 0.0, event);
+                    launcherMotor.setVelocity(0.0, RobotParams.LAUNCH_VELOCITY / 60.0, 0.0, event);
                     sm.waitForSingleEvent(event, State.LAUNCH);
                     break;
 
