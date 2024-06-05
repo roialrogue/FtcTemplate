@@ -318,7 +318,7 @@ public class RobotParams
     public static final double LAUNCH_VELOCITY                 = 1000; //max 315,000
     public static final double LAUNCHER_SERVO_MIN_POS          = 0.30;
     public static final double LAUNCHER_SERVO_MAX_POS          = 0.18;
-    public static final double LAUCNHER_MAX_VEL                = 1620; //RPM
+    public static final double LAUNCHER_MAX_VEL                = 1620; //RPM
     //
     // Hang Subsystem
     //

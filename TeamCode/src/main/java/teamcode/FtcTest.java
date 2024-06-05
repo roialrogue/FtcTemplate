@@ -709,12 +709,7 @@ public class FtcTest extends FtcTeleOp
                 }
                 else if (testChoices.test == Test.TUNE_LAUNCHER_POWER && robot.launcher !=null)
                 {
-                    if(pressed)
-                    {
-                        launchVelocity += LAUNCHER_VEL_STEP;
-                        if (launchVelocity > 315000) launchVelocity = 315000;
-                    }
-                    passToTeleOp = false;
+                    if (launchVelocity > RobotParams.LAUNCHER_MAX_VEL) launchVelocity = RobotParams.LAUNCHER_MAX_VEL;
                 }
                 break;
 
