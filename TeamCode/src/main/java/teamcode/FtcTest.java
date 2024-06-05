@@ -538,7 +538,7 @@ public class FtcTest extends FtcTeleOp
                     break;
                 case TUNE_LAUNCHER_VEL:
                     if (robot.launcher != null ) {
-                        robot.dashboard.displayPrintf(lineNum++, "LauncherVelocity=" + robot.launcher.getLaucnchMotorVelocity() + "/" + launchVelocity);
+                        robot.dashboard.displayPrintf(lineNum++, "LauncherVelocity=" + (robot.launcher.getLaucnchMotorVelocity() * 60.0) + "/" + launchVelocity);
                     }
             }
         }
@@ -623,7 +623,7 @@ public class FtcTest extends FtcTeleOp
                 }
                 else if (testChoices.test == Test.TUNE_LAUNCHER_VEL && robot.launcher != null)
                 {
-                    robot.launcher.launcherMotor.setVelocity(pressed ? launchVelocity : 0.0);
+                    robot.launcher.launcherMotor.setVelocity(pressed ? launchVelocity/60.0 : 0.0);
                     passToTeleOp = false;
                 }
                 break;
