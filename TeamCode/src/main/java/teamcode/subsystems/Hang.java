@@ -33,6 +33,6 @@ public class Hang
 
     public TrcMotor getHangMotor()
     {
-        return hangMotor;
+//        return hangMotor;
     }
 }
