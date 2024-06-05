@@ -315,7 +315,7 @@ public class RobotParams
     public static final boolean LAUNCHER_SERVO_INVERTED        = false;
     public static final double LAUNCHER_REV_PER_COUNT          = 1/103.8;
     public static final double LAUCNHER_TRIGGER_TIME           = 1;
-    public static final double LAUNCH_VELOCITY                 = 270000; //max 315,000
+    public static final double LAUNCH_VELOCITY                 = 1000; //max 315,000
     public static final double LAUNCHER_SERVO_MIN_POS          = 0.30;
     public static final double LAUNCHER_SERVO_MAX_POS          = 0.18;
     //

@@ -60,7 +60,7 @@ public class FtcTest extends FtcTeleOp
     private static final String moduleName = FtcTest.class.getSimpleName();
     private static final boolean logEvents = true;
     private static final boolean debugPid = true;
-    private static final double LAUNCHER_VEL_STEP = 1000;
+    private static final double LAUNCHER_VEL_STEP = 10;
     private double launchVelocity = RobotParams.LAUNCH_VELOCITY;
 
     private enum Test
