@@ -323,6 +323,33 @@ public class RobotParams
     //
     // Hang Subsystem
     //
-    public static final boolean HANG_MOTOR_INVERTED            = true;
+    public static final boolean HANG_MOTOR_INVERTED           = true;
+    public static final boolean HANG_HAS_LOWER_LIMIT_SWITCH   = true;
+    public static final boolean HANG_LOWER_LIMIT_INVERTED     = false;
+    public static final boolean HANG_HAS_UPPER_LIMIT_SWITCH   = true;
+    public static final boolean HANG_UPPER_LIMIT_INVERTED     = false;
+    public static final boolean HANG_VOLTAGE_COMP_ENABLED     = true;
+    public static final int GEAR_RATIO                        = 1/28;
+    public static final double HANG_ENCODER_PPR               = GOBILDA_5203_312_ENCODER_PPR;
+    public static final double HANG_INCHES_PER_COUNT          = HANG_ENCODER_PPR * GEAR_RATIO;
+    public static final double HANG_OFFSET                    = 0.0;
+    public static final double HANG_MIN_POS                   = HANG_OFFSET;
+    public static final double HANG_MAX_POS                   = 20.0;
+    public static final double HANG_HANGING_POS               = 12.00;
+    //Preset positions
+    public static final double HANG_PRESET_TOLERANCE          = 0.5;
+    public static final double[] HANG_PRESETS = new double[] {
+            HANG_MIN_POS,HANG_HANGING_POS, HANG_MAX_POS
+    };
+    // PID Actuator parameters.
+    public static final double HANG_KP = 0.0;
+    public static final double HANG_KI = 0.0;
+    public static final double HANG_KD = 0.0;
+    public static final double HANG_KF = 0.0;
+    public static final double HANG_TOLERANCE = 0.0;
+    public static final double HANG_IZONE = 0.0;
+    public static final double HANG_STALL_DETECTION_DELAY = 0.0;
+    public static final double HANG_STALL_DETECTION_TIMEOUT = 0.0;
+    public static final double HANG_STALL_ERR_RATE_THRESHOLD = 0.0;
 
 }   //class RobotParams
