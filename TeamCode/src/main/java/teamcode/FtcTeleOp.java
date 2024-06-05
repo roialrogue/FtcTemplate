@@ -261,8 +261,6 @@ public class FtcTeleOp extends FtcOpMode
                 break;
 
             case FtcGamepad.GAMEPAD_X:
-                robot.launcher.launch(null);
-                robot.globalTracer.traceInfo(moduleName,"Airplane Launched");
                 break;
 
             case FtcGamepad.GAMEPAD_Y:
@@ -388,6 +386,9 @@ public class FtcTeleOp extends FtcOpMode
                 break;
 
             case FtcGamepad.GAMEPAD_Y:
+                if (pressed && robot.launcher != null) {
+                    robot.launcher.launch(null);
+                }
                 break;
 
             case FtcGamepad.GAMEPAD_LBUMPER:

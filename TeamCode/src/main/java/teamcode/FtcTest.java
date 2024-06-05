@@ -709,7 +709,10 @@ public class FtcTest extends FtcTeleOp
                 }
                 else if (testChoices.test == Test.TUNE_LAUNCHER_VEL && robot.launcher !=null)
                 {
-                    if (launchVelocity > RobotParams.LAUNCHER_MAX_VEL) launchVelocity = RobotParams.LAUNCHER_MAX_VEL;
+                    if (pressed) {
+                        launchVelocity += LAUNCHER_VEL_STEP;
+                        if (launchVelocity > RobotParams.LAUNCHER_MAX_VEL) launchVelocity = RobotParams.LAUNCHER_MAX_VEL;
+                    }
                 }
                 break;
 
@@ -921,7 +924,7 @@ public class FtcTest extends FtcTeleOp
         testMenu.addChoice("Tune Turn PID", Test.TUNE_TURN_PID, false, tuneKpMenu);
         testMenu.addChoice("Pure Pursuit Drive", Test.PURE_PURSUIT_DRIVE, false);
         testMenu.addChoice("Calibrate Swerve Steering", Test.CALIBRATE_SWERVE_STEERING, false);
-        testMenu.addChoice("Tune Launcher Power", Test.TUNE_LAUNCHER_VEL, false);
+        testMenu.addChoice("Tune Launcher Velocity", Test.TUNE_LAUNCHER_VEL, false);
 
         xTargetMenu.setChildMenu(yTargetMenu);
         yTargetMenu.setChildMenu(turnTargetMenu);
