@@ -50,10 +50,11 @@ public class AirplaneLauncher
         return launcherMotor;
     }
 
-    public TrcServo getlauncherServo()
+    public State getLauncherState()
     {
-        return launcherServo;
+        return sm.getState();
     }
+
 
 
     public double cpsToRpm(double cps)
