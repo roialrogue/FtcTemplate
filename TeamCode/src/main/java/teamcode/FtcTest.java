@@ -615,16 +615,16 @@ public class FtcTest extends FtcTeleOp
                     }
                     passToTeleOp = false;
                 }
-                else if (testChoices.test == Test.VISION_TEST && pressed)
-                {
-                    fpsMeterEnabled = !fpsMeterEnabled;
-                    robot.vision.setFpsMeterEnabled(fpsMeterEnabled);
-                    robot.globalTracer.traceInfo(moduleName, "fpsMeterEnabled = %s", fpsMeterEnabled);
-                }
                 else if (testChoices.test == Test.TUNE_LAUNCHER_VEL && robot.launcher != null)
                 {
-                    robot.launcher.getlauncherMotor().setVelocity(pressed ? robot.launcher.rpmToCps(launchVelocity) : 0.0);
-                    robot.launcher.getlauncherServo().setPosition(Released ? RobotParams.LAUNCHER_SERVO_MAX_POS : RobotParams.LAUNCHER_SERVO_MIN_POS);
+                    if (pressed)
+                    {
+                        robot.launcher.getlauncherMotor().setVelocity(robot.launcher.rpmToCps(launchVelocity) );
+                    }
+                    else
+                    {
+                        robot.launcher.trigger(null);
+                    }
                     passToTeleOp = false;
                 }
                 break;

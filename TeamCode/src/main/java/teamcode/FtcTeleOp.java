@@ -35,7 +35,6 @@ import TrcCommonLib.trclib.TrcTimer;
 import TrcFtcLib.ftclib.FtcGamepad;
 import TrcFtcLib.ftclib.FtcOpMode;
 import teamcode.drivebases.SwerveDrive;
-import teamcode.subsystems.Intake;
 
 /**
  * This class contains the TeleOp Mode program.
@@ -387,7 +386,7 @@ public class FtcTeleOp extends FtcOpMode
 
             case FtcGamepad.GAMEPAD_Y:
                 if (pressed && robot.launcher != null) {
-                    robot.launcher.launch(null);
+                    robot.launcher.startLaunch(null);
                 }
                 break;
 

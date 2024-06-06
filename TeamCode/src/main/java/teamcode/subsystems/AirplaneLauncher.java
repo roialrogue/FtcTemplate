@@ -110,16 +110,27 @@ public class AirplaneLauncher
         finish(true);
     }   //cancel
 
-    public void launch(TrcEvent completionEvent)
+    public void startLaunch(TrcEvent completionEvent)
+    {
+        launchOp(State.START, completionEvent);
+    }
+
+    public void trigger(TrcEvent completionEvent)
+    {
+        launchOp(State.LAUNCH, completionEvent);
+    }
+
+    private void launchOp(State startState, TrcEvent completionEvent)
     {
         if (!sm.isEnabled())
         {
             this.completionEvent = completionEvent;
-            sm.start(State.START);
+            sm.start(startState);
             launchTaskObj.registerTask(TrcTaskMgr.TaskType.POST_PERIODIC_TASK);
             tracer.traceInfo(instanceName, "Start launch operation.");
         }
-    }   //launch
+    }   //launchOp
+
 
     private void launchTask(TrcTaskMgr.TaskType taskType, TrcRobot.RunMode runMode, boolean slowPeriodicLoop)
     {
