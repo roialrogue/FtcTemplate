@@ -48,6 +48,7 @@ import TrcFtcLib.ftclib.FtcPidCoeffCache;
 import TrcFtcLib.ftclib.FtcValueMenu;
 import teamcode.drivebases.RobotDrive;
 import teamcode.drivebases.SwerveDrive;
+import teamcode.subsystems.AirplaneLauncher;
 
 /**
  * This class contains the Test Mode program. It extends FtcTeleOp so that we can teleop control the robot for
@@ -538,7 +539,7 @@ public class FtcTest extends FtcTeleOp
                     break;
                 case TUNE_LAUNCHER_VEL:
                     if (robot.launcher != null ) {
-                        robot.dashboard.displayPrintf(lineNum++, "LauncherVelocity=" + (robot.launcher.getLaucnchMotorVelocity() * 60.0) + "/" + launchVelocity);
+                        robot.dashboard.displayPrintf(lineNum++, "LauncherVelocity=" + (robot.launcher.getLauncherRPM()) + "/" + launchVelocity);
                     }
             }
         }
@@ -623,7 +624,7 @@ public class FtcTest extends FtcTeleOp
                 }
                 else if (testChoices.test == Test.TUNE_LAUNCHER_VEL && robot.launcher != null)
                 {
-                    robot.launcher.launcherMotor.setVelocity(pressed ? launchVelocity/60.0 : 0.0);
+                    robot.launcher.getlauncherMotor().setVelocity(pressed ? robot.launcher.rpmToCps(launchVelocity) : 0.0);
                     passToTeleOp = false;
                 }
                 break;
@@ -710,7 +711,7 @@ public class FtcTest extends FtcTeleOp
                 else if (testChoices.test == Test.TUNE_LAUNCHER_VEL && robot.launcher !=null)
                 {
                     if (pressed) {
-                        launchVelocity += LAUNCHER_VEL_STEP;
+                        launchVelocity += robot.launcher.rpmToCps(LAUNCHER_VEL_STEP);
                         if (launchVelocity > RobotParams.LAUNCHER_MAX_VEL) launchVelocity = RobotParams.LAUNCHER_MAX_VEL;
                     }
                 }
@@ -745,7 +746,7 @@ public class FtcTest extends FtcTeleOp
                 {
                     if(pressed)
                     {
-                        launchVelocity -= LAUNCHER_VEL_STEP;
+                        launchVelocity -= robot.launcher.rpmToCps(LAUNCHER_VEL_STEP);
                         if (launchVelocity < 0.0) launchVelocity = 0.0;
                     }
                     passToTeleOp = false;

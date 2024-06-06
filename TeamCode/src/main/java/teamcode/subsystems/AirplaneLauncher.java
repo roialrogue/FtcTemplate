@@ -1,6 +1,7 @@
 package teamcode.subsystems;
 
 import TrcCommonLib.trclib.TrcDbgTrace;
+import TrcCommonLib.trclib.TrcMotor;
 import TrcFtcLib.ftclib.FtcDcMotor;
 import TrcFtcLib.ftclib.FtcServo;
 import teamcode.Robot;
@@ -21,7 +22,7 @@ public class AirplaneLauncher
     private final TrcDbgTrace tracer;
     private final String instanceName;
     private final Robot robot;
-    public final FtcDcMotor launcherMotor; //change back to private
+    private final FtcDcMotor launcherMotor;
     private final FtcServo launcherServo;
     private final TrcTaskMgr.TaskObject launchTaskObj;
     private final TrcEvent event;
@@ -35,14 +36,36 @@ public class AirplaneLauncher
         this.robot = robot;
         launcherMotor = new FtcDcMotor(instanceName + ".motor");
         launcherMotor.setMotorInverted(RobotParams.LAUNCHER_MOTOR_INVERTED);
-        launcherMotor.setPositionSensorScaleAndOffset(RobotParams.LAUNCHER_REV_PER_COUNT, 0.0);
-        launcherMotor.setVelocityPidTolerance(RobotParams.LAUNCHER_VEL_TOLERANCE / 60.0);
+        launcherMotor.setVelocityPidTolerance(rpmToCps(RobotParams.LAUNCHER_VEL_TOLERANCE));
         launcherServo = new FtcServo(instanceName + ".servo");
         launcherServo.setInverted(RobotParams.LAUNCHER_SERVO_INVERTED);
         launchTaskObj = TrcTaskMgr.createTask(instanceName + ".task", this::launchTask);
         event = new TrcEvent(instanceName);
         sm = new TrcStateMachine<>(instanceName);
         launcherServo.setPosition(RobotParams.LAUNCHER_SERVO_MIN_POS);
+    }
+    public TrcMotor getlauncherMotor()
+    {
+        return launcherMotor;
+    }
+
+    public double cpsToRpm(double cps)
+    {
+        return cps * RobotParams.LAUNCHER_REV_PER_COUNT * 60.0;
+    }
+
+    public double rpmToCps(double rpm)
+    {
+        return rpm /  RobotParams.LAUNCHER_REV_PER_COUNT / 60.0;
+    }
+
+    public void setLauncherRPM(double rpm)
+    {
+        launcherMotor.setVelocity(rpmToCps(rpm));
+    }
+    public double getLauncherRPM()
+    {
+        return cpsToRpm(launcherMotor.getVelocity());
     }
 
     public double servoLauncherPos()
@@ -107,7 +130,7 @@ public class AirplaneLauncher
             {
                 case START:
                     // Set launch motor velocity and wait for it to reach target speed.
-                    launcherMotor.setVelocity(0.0, RobotParams.LAUNCH_VELOCITY / 60.0, 0.0, event);
+                    launcherMotor.setVelocity(0.0, rpmToCps(RobotParams.LAUNCH_VELOCITY), 0.0, event);
                     sm.waitForSingleEvent(event, State.LAUNCH);
                     break;
 
