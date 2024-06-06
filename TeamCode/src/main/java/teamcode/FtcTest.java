@@ -624,6 +624,7 @@ public class FtcTest extends FtcTeleOp
                 else if (testChoices.test == Test.TUNE_LAUNCHER_VEL && robot.launcher != null)
                 {
                     robot.launcher.getlauncherMotor().setVelocity(pressed ? robot.launcher.rpmToCps(launchVelocity) : 0.0);
+                    robot.launcher.getlauncherServo().setPosition(Released ? RobotParams.LAUNCHER_SERVO_MAX_POS : RobotParams.LAUNCHER_SERVO_MIN_POS);
                     passToTeleOp = false;
                 }
                 break;

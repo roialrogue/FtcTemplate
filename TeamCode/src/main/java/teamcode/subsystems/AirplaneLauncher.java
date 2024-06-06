@@ -2,6 +2,7 @@ package teamcode.subsystems;
 
 import TrcCommonLib.trclib.TrcDbgTrace;
 import TrcCommonLib.trclib.TrcMotor;
+import TrcCommonLib.trclib.TrcServo;
 import TrcFtcLib.ftclib.FtcDcMotor;
 import TrcFtcLib.ftclib.FtcServo;
 import teamcode.Robot;
@@ -48,6 +49,12 @@ public class AirplaneLauncher
     {
         return launcherMotor;
     }
+
+    public TrcServo getlauncherServo()
+    {
+        return launcherServo;
+    }
+
 
     public double cpsToRpm(double cps)
     {
