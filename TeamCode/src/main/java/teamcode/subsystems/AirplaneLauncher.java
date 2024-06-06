@@ -68,14 +68,9 @@ public class AirplaneLauncher
         return cpsToRpm(launcherMotor.getVelocity());
     }
 
-    public double servoLauncherPos()
+    public double servoLauncherServoPos()
     {
         return launcherServo.getPosition();
-    }
-
-    public double getLaucnchMotorVelocity()
-    {
-        return launcherMotor.getVelocity();
     }
 
     private void finish(boolean canceled)
@@ -130,7 +125,7 @@ public class AirplaneLauncher
             {
                 case START:
                     // Set launch motor velocity and wait for it to reach target speed.
-                    launcherMotor.setVelocity(0.0, rpmToCps(RobotParams.LAUNCH_VELOCITY), 0.0, event);
+                    launcherMotor.setVelocity(0.0, rpmToCps(RobotParams.LAUNCHER_VELOCITY), 0.0, event);
                     sm.waitForSingleEvent(event, State.LAUNCH);
                     break;
 

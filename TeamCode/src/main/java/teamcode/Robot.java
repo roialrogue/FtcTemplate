@@ -299,7 +299,7 @@ public class Robot
             }
             if(launcher != null)
             {
-                dashboard.displayPrintf(lineNum++, "Launcher: servoPos=" + launcher.servoLauncherPos() + ", motorVelocity=" + launcher.getLaucnchMotorVelocity());
+                dashboard.displayPrintf(lineNum++, "Launcher: servoPos=" + launcher.servoLauncherServoPos() + ", motorVelocity=" + launcher.getLauncherRPM());
             }
         }
     }   //updateStatus
