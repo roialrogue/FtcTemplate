@@ -34,7 +34,6 @@ import TrcCommonLib.trclib.TrcPidController;
 import TrcCommonLib.trclib.TrcPose2D;
 import TrcCommonLib.trclib.TrcUtil;
 import TrcFtcLib.ftclib.FtcGamepad;
-import teamcode.subsystems.AirplaneLauncher;
 
 /**
  * This class contains robot and subsystem constants and parameters.
@@ -331,9 +330,9 @@ public class RobotParams
     public static final boolean HANG_HAS_UPPER_LIMIT_SWITCH   = true;
     public static final boolean HANG_UPPER_LIMIT_INVERTED     = false;
     public static final boolean HANG_VOLTAGE_COMP_ENABLED     = true;
-    public static final int GEAR_RATIO                        = 1/28;
+    public static final double HANG_GEAR_RATIO                = 28.0;
     public static final double HANG_ENCODER_PPR               = GOBILDA_5203_312_ENCODER_PPR;
-    public static final double HANG_INCHES_PER_COUNT          = HANG_ENCODER_PPR * GEAR_RATIO;
+    public static final double HANG_DEG_PER_COUNT             = 360.0 / HANG_ENCODER_PPR / HANG_GEAR_RATIO;
     public static final double HANG_OFFSET                    = 0.0;
     public static final double HANG_MIN_POS                   = HANG_OFFSET;
     public static final double HANG_MAX_POS                   = 20.0;
