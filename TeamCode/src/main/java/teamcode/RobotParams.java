@@ -342,15 +342,10 @@ public class RobotParams
     public static final double[] HANG_PRESETS = new double[] {
             HANG_MIN_POS,HANG_HANGING_POS, HANG_MAX_POS
     };
-    // PID Actuator parameters.
-    public static final double HANG_KP = 0.0;
-    public static final double HANG_KI = 0.0;
-    public static final double HANG_KD = 0.0;
-    public static final double HANG_KF = 0.0;
-    public static final double HANG_TOLERANCE = 0.0;
-    public static final double HANG_IZONE = 0.0;
-    public static final double HANG_STALL_DETECTION_DELAY = 0.0;
-    public static final double HANG_STALL_DETECTION_TIMEOUT = 0.0;
-    public static final double HANG_STALL_ERR_RATE_THRESHOLD = 0.0;
+    //Stall Protection
+    public static final double HANG_STALL_MIN_POWER= 0.0;
+    public static final double HANG_STALL_TOLERANCE= 0.0;
+    public static final double HANG_STALL_TIMEOUT= 0.0;
+    public static final double HANG_STALL_RESET_TIMEOUT= 0.0;
 
 }   //class RobotParams
