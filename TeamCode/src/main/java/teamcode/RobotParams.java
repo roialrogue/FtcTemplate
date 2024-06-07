@@ -319,7 +319,7 @@ public class RobotParams
     public static final double LAUNCHER_SERVO_MIN_POS          = 0.30;
     public static final double LAUNCHER_SERVO_MAX_POS          = 0.18;
     public static final double LAUNCHER_MAX_VEL                = 1620; //RPM
-    public static final double LAUNCHER_VEL_TOLERANCE          = 20;  //RPM
+    public static final double LAUNCHER_VEL_TOLERANCE          = 15;  //RPM
     public static final double LAUNCHER_VEL_STEP              = 10; //RPM
     //
     // Hang Subsystem
