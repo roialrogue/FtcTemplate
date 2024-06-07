@@ -22,8 +22,6 @@ public class Hang
                 .setPositionScaleAndOffset(RobotParams.HANG_DEG_PER_COUNT, RobotParams.HANG_OFFSET)
                 .setPositionPresets(RobotParams.HANG_PRESET_TOLERANCE,RobotParams.HANG_PRESETS);
         hangMotor = new FtcMotorActuator(RobotParams.HWNAME_HANG, hangParams).getActuator();
-        hangMotor.setSoftwarePidEnabled(true);
-        hangMotor.setPositionPidParameters(RobotParams.HANG_KP, RobotParams.HANG_KI, RobotParams.HANG_KD, RobotParams.HANG_KF, RobotParams.HANG_IZONE,RobotParams.HANG_TOLERANCE);
         hangMotor.setStallDetectionEnabled(
                 RobotParams.HANG_STALL_DETECTION_DELAY,RobotParams.HANG_STALL_DETECTION_TIMEOUT,RobotParams.HANG_STALL_ERR_RATE_THRESHOLD
         );
@@ -33,4 +31,5 @@ public class Hang
     {
         return hangMotor;
     }
+
 }
