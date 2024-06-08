@@ -333,6 +333,7 @@ public class RobotParams
     public static final boolean HANG_HAS_UPPER_LIMIT_SWITCH   = false;
     public static final boolean HANG_UPPER_LIMIT_INVERTED     = false;
     public static final boolean HANG_VOLTAGE_COMP_ENABLED     = true;
+    public static final double HANG_POWER_LIMIT               = 1.0;
     public static final double HANG_GEAR_RATIO                = 28.0;
     public static final double HANG_ENCODER_PPR               = GOBILDA_5203_312_ENCODER_PPR;
     public static final double HANG_DEG_PER_COUNT             = 360.0 / HANG_ENCODER_PPR / HANG_GEAR_RATIO;

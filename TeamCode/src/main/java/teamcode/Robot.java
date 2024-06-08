@@ -301,13 +301,18 @@ public class Robot
             //
             // Display other subsystem status here.
             //
-            if (intake != null) {
+            if (intake != null)
+            {
                 dashboard.displayPrintf(
                         lineNum++, "Intake: leftClawClosed=" + intake.isLeftClawClosed() + ", rightClawClosed=" + intake.isRightClawClosed());
             }
             if(launcher != null)
             {
                 dashboard.displayPrintf(lineNum++, "Launcher: servoPos=" + launcher.servoLauncherServoPos() + ", motorVelocity=" + launcher.getLauncherRPM() + ", state=" + launcher.getLauncherState());
+            }
+            if(hang != null)
+            {
+                dashboard.displayPrintf(lineNum++,"Hang: power=" + hang.getPower() + ", pos=" + hang.getPosition() + "/" + hang.getPidTarget());
             }
         }
     }   //updateStatus

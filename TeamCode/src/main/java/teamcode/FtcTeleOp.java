@@ -49,6 +49,7 @@ public class FtcTeleOp extends FtcOpMode
     protected FtcGamepad operatorGamepad;
     private double drivePowerScale = RobotParams.DRIVE_POWER_SCALE_NORMAL;
     private double turnPowerScale = RobotParams.TURN_POWER_SCALE_NORMAL;
+    private double hangPrevPower = 0.0;
     private boolean manualOverride = false;
     private boolean relocalizing = false;
     private TrcPose2D robotFieldPose = null;
@@ -199,6 +200,24 @@ public class FtcTeleOp extends FtcOpMode
             //
             if (RobotParams.Preferences.useSubsystems)
             {
+                //hang subsystem
+                if(robot.hang != null)
+                {
+                    double hangPower = operatorGamepad.getLeftStickY(true) * RobotParams.HANG_POWER_LIMIT;
+                    if(hangPower != hangPrevPower)
+                    {
+                        if (manualOverride)
+                        {
+                            robot.hang.setPower(hangPower);
+                        }
+                        else
+                        {
+                            robot.hang.setPidPower(null, hangPower, RobotParams.HANG_MIN_POS, RobotParams.HANG_MAX_POS, false);
+                        }
+                        hangPrevPower = hangPower;
+                    }
+                }
+
             }
             // Display subsystem status.
             if (RobotParams.Preferences.doStatusUpdate)
@@ -375,7 +394,7 @@ public class FtcTeleOp extends FtcOpMode
         {
             case FtcGamepad.GAMEPAD_A:
                 if (pressed && robot.hang != null && TrcTimer.getModeElapsedTime() >= RobotParams.END_GAME_TIME) {
-                    robot.hang.presetPositionUp(RobotParams.HANG_PRESETS,);
+                    robot.hang.presetPositionUp(moduleName,RobotParams.HANG_POWER_LIMIT);
                 }
                 break;
 
