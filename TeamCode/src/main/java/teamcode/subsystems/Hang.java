@@ -19,8 +19,7 @@ public class Hang
                         RobotParams.HANG_HAS_UPPER_LIMIT_SWITCH,
                         RobotParams.HANG_UPPER_LIMIT_INVERTED)
                 .setVoltageCompensationEnabled(RobotParams.HANG_VOLTAGE_COMP_ENABLED)
-                .setPositionScaleAndOffset(RobotParams.HANG_DEG_PER_COUNT, RobotParams.HANG_OFFSET)
-                .setPositionPresets(RobotParams.HANG_PRESET_TOLERANCE,RobotParams.HANG_PRESETS);
+                .setPositionScaleAndOffset(RobotParams.HANG_DEG_PER_COUNT, RobotParams.HANG_OFFSET);
         hangMotor = new FtcMotorActuator(RobotParams.HWNAME_HANG, hangParams).getActuator();
         hangMotor.setStallProtection(
                 RobotParams.HANG_STALL_MIN_POWER, RobotParams.HANG_STALL_TOLERANCE,

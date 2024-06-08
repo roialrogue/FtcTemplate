@@ -344,11 +344,7 @@ public class RobotParams
     public static final double HANG_HANGING_POS               = 120; //Degrees
     //Power
     public static final double HANG_CAL_POWER = -0.25;
-    //Preset positions
-    public static final double HANG_PRESET_TOLERANCE          = 2; //Degrees
-    public static final double[] HANG_PRESETS = new double[] {
-            HANG_HANGING_POS, HANG_SETUP_POS
-    };
+
     //Stall Protection
     public static final double HANG_STALL_MIN_POWER= Math.abs(HANG_CAL_POWER);
     public static final double HANG_STALL_TOLERANCE= 0.1;

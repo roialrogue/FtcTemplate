@@ -50,6 +50,7 @@ public class FtcTeleOp extends FtcOpMode
     private double drivePowerScale = RobotParams.DRIVE_POWER_SCALE_NORMAL;
     private double turnPowerScale = RobotParams.TURN_POWER_SCALE_NORMAL;
     private double hangPrevPower = 0.0;
+    private double hangPos = RobotParams.HANG_MIN_POS;
     private boolean manualOverride = false;
     private boolean relocalizing = false;
     private TrcPose2D robotFieldPose = null;
@@ -394,7 +395,19 @@ public class FtcTeleOp extends FtcOpMode
         {
             case FtcGamepad.GAMEPAD_A:
                 if (pressed && robot.hang != null && TrcTimer.getModeElapsedTime() >= RobotParams.END_GAME_TIME) {
-                    robot.hang.presetPositionUp(moduleName,RobotParams.HANG_POWER_LIMIT);
+                    if (hangPos == RobotParams.HANG_MIN_POS)
+                    {
+                        hangPos = RobotParams.HANG_SETUP_POS;
+                    }
+                    else if (hangPos == RobotParams.HANG_SETUP_POS)
+                    {
+                        hangPos = RobotParams.HANG_HANGING_POS;
+                    }
+                    else
+                    {
+                        hangPos = RobotParams.HANG_MIN_POS;
+                    }
+                    robot.hang.setPosition(moduleName, 0.0, hangPos, false, RobotParams.HANG_POWER_LIMIT, null, 0.0);
                 }
                 break;
 
