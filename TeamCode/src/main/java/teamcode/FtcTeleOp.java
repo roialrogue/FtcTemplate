@@ -273,6 +273,10 @@ public class FtcTeleOp extends FtcOpMode
                         // Cancel all auto-assist driving.
                         robot.robotDrive.cancel();
                     }
+                    if (robot.hang != null)
+                    {
+                        robot.hang.cancel();
+                    }
                 }
                 break;
 

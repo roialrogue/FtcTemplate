@@ -324,6 +324,10 @@ public class Robot
      */
     public void zeroCalibrate(String owner)
     {
+        if (hang != null)
+        {
+            hang.zeroCalibrate(owner, RobotParams.HANG_CAL_POWER);
+        }
     }   //zeroCalibrate
 
     /**
