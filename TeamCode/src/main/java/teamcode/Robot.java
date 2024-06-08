@@ -74,7 +74,7 @@ public class Robot
     public RobotDrive robotDrive;
     public Intake intake;
     public AirplaneLauncher launcher;
-    public Hang hang;
+    public TrcMotor hang;
 
     /**
      * Constructor: Create an instance of the object.
@@ -142,7 +142,7 @@ public class Robot
                 }
                 if(RobotParams.Preferences.useHang)
                 {
-                    hang = new Hang();
+                    hang = new Hang().getHangMotor();
                     hang.zeroCalibrate(RobotParams.HANG_CAL_POWER);
                 }
             }

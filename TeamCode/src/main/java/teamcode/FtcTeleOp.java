@@ -374,6 +374,9 @@ public class FtcTeleOp extends FtcOpMode
         switch (button)
         {
             case FtcGamepad.GAMEPAD_A:
+                if (pressed && robot.hang != null && TrcTimer.getModeElapsedTime() >= RobotParams.END_GAME_TIME) {
+                    robot.hang.presetPositionUp(RobotParams.HANG_PRESETS,);
+                }
                 break;
 
             case FtcGamepad.GAMEPAD_B:
