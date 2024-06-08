@@ -116,8 +116,11 @@ public class RobotParams
     // Subsystems.
     public static final String HWNAME_INTAKE                    = "Intake"; //cs0 = Intake.leftServo cs2 = Intake.rightServo
     public static final String HWNAME_LAUNCHER                  = "Launcher"; //Launcher.motor cs4 = Launcher.servo
-    public static final String HWNAME_HANG                      = "Hang";
-
+    public static final String HWNAME_HANG                      = "Hang"; // Hang.motor es3
+    //
+    // Times
+    //
+    public static final double END_GAME_TIME                    = 90;
 
     //
     // Field dimensions.
@@ -336,16 +339,19 @@ public class RobotParams
     public static final double HANG_OFFSET                    = 67.0; //Degrees
     public static final double HANG_MIN_POS                   = HANG_OFFSET;
     public static final double HANG_MAX_POS                   = 180; //Degrees
+    public static final double HANG_SETUP_POS                 = 165; //Degrees
     public static final double HANG_HANGING_POS               = 120; //Degrees
+    //Power
+    public static final double HANG_CAL_POWER = -0.25;
     //Preset positions
     public static final double HANG_PRESET_TOLERANCE          = 2; //Degrees
     public static final double[] HANG_PRESETS = new double[] {
-            HANG_MIN_POS,HANG_HANGING_POS, HANG_MAX_POS
+            HANG_SETUP_POS, HANG_HANGING_POS
     };
     //Stall Protection
-    public static final double HANG_STALL_MIN_POWER= 0.0;
-    public static final double HANG_STALL_TOLERANCE= 0.0;
-    public static final double HANG_STALL_TIMEOUT= 0.0;
+    public static final double HANG_STALL_MIN_POWER= Math.abs(HANG_CAL_POWER);
+    public static final double HANG_STALL_TOLERANCE= 0.1;
+    public static final double HANG_STALL_TIMEOUT= 0.2;
     public static final double HANG_STALL_RESET_TIMEOUT= 0.0;
 
 }   //class RobotParams

@@ -31,6 +31,7 @@ import TrcCommonLib.trclib.TrcServo;
 import TrcCommonLib.trclib.TrcTimer;
 import TrcFtcLib.ftclib.FtcDashboard;
 import TrcFtcLib.ftclib.FtcMatchInfo;
+import TrcFtcLib.ftclib.FtcMotorActuator;
 import TrcFtcLib.ftclib.FtcOpMode;
 import TrcFtcLib.ftclib.FtcRobotBattery;
 import teamcode.drivebases.MecanumDrive;
@@ -38,6 +39,7 @@ import teamcode.drivebases.RobotDrive;
 import teamcode.drivebases.SwerveDrive;
 import teamcode.subsystems.AirplaneLauncher;
 import teamcode.subsystems.BlinkinLEDs;
+import teamcode.subsystems.Hang;
 import teamcode.subsystems.Intake;
 import teamcode.vision.Vision;
 
@@ -72,6 +74,7 @@ public class Robot
     public RobotDrive robotDrive;
     public Intake intake;
     public AirplaneLauncher launcher;
+    public Hang hang;
 
     /**
      * Constructor: Create an instance of the object.
@@ -136,6 +139,11 @@ public class Robot
                 if(RobotParams.Preferences.useLauncher)
                 {
                     launcher = new AirplaneLauncher(RobotParams.HWNAME_LAUNCHER, this);
+                }
+                if(RobotParams.Preferences.useHang)
+                {
+                    hang = new Hang();
+                    hang.zeroCalibrate(RobotParams.HANG_CAL_POWER);
                 }
             }
         }

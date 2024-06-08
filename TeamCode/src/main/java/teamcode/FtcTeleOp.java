@@ -385,7 +385,7 @@ public class FtcTeleOp extends FtcOpMode
                 break;
 
             case FtcGamepad.GAMEPAD_Y:
-                if (pressed && robot.launcher != null) {
+                if (pressed && robot.launcher != null && TrcTimer.getModeElapsedTime() >= RobotParams.END_GAME_TIME) {
                     robot.launcher.startLaunch(null);
                 }
                 break;
