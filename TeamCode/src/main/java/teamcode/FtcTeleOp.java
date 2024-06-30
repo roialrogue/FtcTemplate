@@ -204,7 +204,7 @@ public class FtcTeleOp extends FtcOpMode
                 //hang subsystem
                 if(robot.hang != null)
                 {
-                    double hangPower = operatorGamepad.getLeftStickY(true) * RobotParams.HANG_POWER_LIMIT;
+                    double hangPower = operatorGamepad.getRightStickY(true) * RobotParams.HANG_POWER_LIMIT;
                     if(hangPower != hangPrevPower)
                     {
                         if (manualOverride)

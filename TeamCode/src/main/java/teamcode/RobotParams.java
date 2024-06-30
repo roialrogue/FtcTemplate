@@ -327,17 +327,18 @@ public class RobotParams
     //
     // Hang Subsystem
     //
-    public static final boolean HANG_MOTOR_INVERTED           = true;
+    public static final boolean HANG_MOTOR_INVERTED           = false;
     public static final boolean HANG_HAS_LOWER_LIMIT_SWITCH   = false;
     public static final boolean HANG_LOWER_LIMIT_INVERTED     = false;
     public static final boolean HANG_HAS_UPPER_LIMIT_SWITCH   = false;
     public static final boolean HANG_UPPER_LIMIT_INVERTED     = false;
     public static final boolean HANG_VOLTAGE_COMP_ENABLED     = true;
     public static final double HANG_POWER_LIMIT               = 1.0;
+    public static final double HANG_TOLERANCE                 = 0.5;
     public static final double HANG_GEAR_RATIO                = 28.0;
     public static final double HANG_ENCODER_PPR               = GOBILDA_5203_312_ENCODER_PPR;
     public static final double HANG_DEG_PER_COUNT             = 360.0 / HANG_ENCODER_PPR / HANG_GEAR_RATIO;
-    public static final double HANG_OFFSET                    = 67.0; //Degrees
+    public static final double HANG_OFFSET                    = 55.0; //Degrees
     public static final double HANG_MIN_POS                   = HANG_OFFSET;
     public static final double HANG_MAX_POS                   = 180; //Degrees
     public static final double HANG_SETUP_POS                 = 165; //Degrees

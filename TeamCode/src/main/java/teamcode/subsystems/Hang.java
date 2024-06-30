@@ -21,6 +21,7 @@ public class Hang
                 .setVoltageCompensationEnabled(RobotParams.HANG_VOLTAGE_COMP_ENABLED)
                 .setPositionScaleAndOffset(RobotParams.HANG_DEG_PER_COUNT, RobotParams.HANG_OFFSET);
         hangMotor = new FtcMotorActuator(RobotParams.HWNAME_HANG, hangParams).getActuator();
+        hangMotor.setPositionPidTolerance(RobotParams.HANG_TOLERANCE);
         hangMotor.setStallProtection(
                 RobotParams.HANG_STALL_MIN_POWER, RobotParams.HANG_STALL_TOLERANCE,
                 RobotParams.HANG_STALL_TIMEOUT, RobotParams.HANG_STALL_RESET_TIMEOUT);
