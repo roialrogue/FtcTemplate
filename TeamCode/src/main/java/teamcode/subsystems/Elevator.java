@@ -3,10 +3,12 @@ package teamcode.subsystems;
 import TrcCommonLib.trclib.TrcMotor;
 import TrcFtcLib.ftclib.FtcMotorActuator;
 import teamcode.RobotParams;
+
 public class Elevator {
     private final TrcMotor elevator;
 
     public Elevator() {
+
         FtcMotorActuator.Params elevatorParams = new FtcMotorActuator.Params()
                 .setMotorInverted(RobotParams.ELEVATOR_MOTOR_INVERTED)
                 .setLowerLimitSwitch(

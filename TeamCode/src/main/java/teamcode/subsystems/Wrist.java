@@ -37,20 +37,24 @@ public class Wrist {
     {
         return leftRightisFlat;
     }
-    public void wristGround(TrcEvent event) {
+
+    public void wristGround(TrcEvent event)
+    {
         wristUpDown.setPosition(RobotParams.WRIST_UPDWON_GROUNDED, event, RobotParams.WRIST_SERVO_TIME);
         wristLeftRight.setPosition(RobotParams.WRIST_LEFTRIGHT_FLAT);
         leftRightisFlat = true;
         upDownPosition = "GROUNDED";
     }
-    public void wristUpSquare(TrcEvent event) {
+    public void wristUpSquare(TrcEvent event)
+    {
         wristLeftRight.setPosition(RobotParams.WRIST_LEFTRIGHT_FLAT);
         wristUpDown.setPosition(RobotParams.WRIST_UPDWON_BOARD, event, RobotParams.WRIST_SERVO_TIME);
         leftRightisFlat = true;
         upDownPosition = "BOARD";
     }
 
-    public void wristUpInverted(TrcEvent event) {
+    public void wristUpInverted(TrcEvent event)
+    {
         wristLeftRight.setPosition(RobotParams.WRIST_LEFTRIGHT_INVERT);
         wristUpDown.setPosition(RobotParams.WRIST_UPDWON_BOARDINVERT, event, RobotParams.WRIST_SERVO_TIME);
         leftRightisFlat = false;
