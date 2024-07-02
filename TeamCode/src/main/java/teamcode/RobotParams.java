@@ -359,7 +359,7 @@ public class RobotParams
     // Elevator.java Subsystem
     //
     public static final boolean ELEVATOR_MOTOR_INVERTED         = false;
-    public static final boolean ELEVATOR_HAS_LOWER_LIMIT_SWITCH = true;
+    public static final boolean ELEVATOR_HAS_LOWER_LIMIT_SWITCH = false;
     public static final boolean ELEVATOR_LOWER_LIMIT_INVERTED   = false;
     public static final boolean ELEVATOR_HAS_UPPER_LIMIT_SWITCH = false;
     public static final boolean ELEVATOR_UPPER_LIMIT_INVERTED   = false;
