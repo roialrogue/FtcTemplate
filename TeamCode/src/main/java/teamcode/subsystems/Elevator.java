@@ -6,7 +6,7 @@ import teamcode.RobotParams;
 public class Elevator {
     private final TrcMotor elevator;
 
-    public Elevator {
+    public Elevator() {
         FtcMotorActuator.Params elevatorParams = new FtcMotorActuator.Params()
                 .setMotorInverted(RobotParams.ELEVATOR_MOTOR_INVERTED)
                 .setLowerLimitSwitch(

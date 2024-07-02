@@ -119,7 +119,7 @@ public class RobotParams
     public static final String HWNAME_INTAKE                    = "Intake"; //cs0 = Intake.leftServo cs2 = Intake.rightServo
     public static final String HWNAME_LAUNCHER                  = "Launcher"; //Launcher.motor cs4 = Launcher.servo
     public static final String HWNAME_HANG                      = "Hang"; // Hang.motor es3
-    public static final String HWNAME_ELEVATOR                  = "Elevator.java";
+    public static final String HWNAME_ELEVATOR                  = "Elevator";
     public static final String HWNAME_WRIST                     = "Wrist";
     //
     // Times
@@ -364,8 +364,9 @@ public class RobotParams
     public static final boolean ELEVATOR_HAS_UPPER_LIMIT_SWITCH = false;
     public static final boolean ELEVATOR_UPPER_LIMIT_INVERTED   = false;
     public static final boolean ELEVATOR_VOLTAGE_COMP_ENABLED   = true;
-    public static final double ELEVATOR_12IN_ENCODER_READING    = 1; //need to measure
-    public static final double ELEVATOR_INCHES_PER_COUNT        = 12/ELEVATOR_12IN_ENCODER_READING;
+    public static final double ELEVATOR_IN_ENCODER_READING      = 1; //need to measure
+    public static final double ELEVATOR_TICK_ENCODER_READING    = 1; //need to measure
+    public static final double ELEVATOR_INCHES_PER_COUNT        = ELEVATOR_IN_ENCODER_READING/ELEVATOR_TICK_ENCODER_READING;
     public static final double ELEVATOR_POWER_LIMIT             = 1.0;
     public static final double ELEVATOR_OFFSET                  = 0;
     public static final double ELEVATOR_MIN                     = ELEVATOR_OFFSET;

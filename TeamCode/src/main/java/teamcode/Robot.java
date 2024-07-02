@@ -39,8 +39,10 @@ import teamcode.drivebases.RobotDrive;
 import teamcode.drivebases.SwerveDrive;
 import teamcode.subsystems.AirplaneLauncher;
 import teamcode.subsystems.BlinkinLEDs;
+import teamcode.subsystems.Elevator;
 import teamcode.subsystems.Hang;
 import teamcode.subsystems.Intake;
+import teamcode.subsystems.Wrist;
 import teamcode.vision.Vision;
 
 /**
@@ -75,6 +77,9 @@ public class Robot
     public Intake intake;
     public AirplaneLauncher launcher;
     public TrcMotor hang;
+    public Wrist wirst;
+    public TrcMotor elevator;
+
 
     /**
      * Constructor: Create an instance of the object.
@@ -144,6 +149,15 @@ public class Robot
                 {
                     hang = new Hang().getHangMotor();
                     hang.zeroCalibrate(RobotParams.HANG_CAL_POWER);
+                }
+                if(RobotParams.Preferences.useWrist)
+                {
+                    wirst = new Wrist(RobotParams.HWNAME_WRIST,this);
+                }
+                if(RobotParams.Preferences.useElevator)
+                {
+                    elevator = new Elevator().getElevator();
+                    hang.zeroCalibrate(RobotParams.ELEVATOR_CAL_POWER);
                 }
             }
         }
@@ -314,6 +328,14 @@ public class Robot
             {
                 dashboard.displayPrintf(lineNum++,"Hang: power=" + hang.getPower() + ", pos=" + hang.getPosition() + "/" + hang.getPidTarget());
             }
+            if(wirst != null)
+            {
+                dashboard.displayPrintf(lineNum++,"Wirst: servoLeftRightFlat="+ wirst.isWristLeftRightFlat() + ", servoUpDownPosition" + wirst.WirstUpDwonPosition());
+            }
+            if(elevator != null)
+            {
+                dashboard.displayPrintf(lineNum++, "Elevator: power=" + elevator.getPower() + ", pos=" + elevator.getPosition() + "/" + elevator.getPidTarget());
+            }
         }
     }   //updateStatus
 
@@ -327,6 +349,7 @@ public class Robot
         if (hang != null)
         {
             hang.zeroCalibrate(owner, RobotParams.HANG_CAL_POWER);
+            elevator.zeroCalibrate(owner, RobotParams.ELEVATOR_CAL_POWER);
         }
     }   //zeroCalibrate
 
