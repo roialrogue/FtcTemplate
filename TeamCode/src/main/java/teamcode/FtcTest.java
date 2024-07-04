@@ -599,6 +599,10 @@ public class FtcTest extends FtcTeleOp
                     }
                     passToTeleOp = false;
                 }
+                else if (testChoices.test == Test.SUBSYSTEMS_TEST && robot.elevator !=null && pressed) {
+                    robot.elevator.setPositionPidParameters(DashboardParams.elevatorKp,DashboardParams.elevatorKi,DashboardParams.elevatorKd,0,DashboardParams.elevatorIZone,DashboardParams.elevatorTol);
+                    robot.elevator.presetPositionDown(moduleName, RobotParams.ELEVATOR_POWER_LIMIT);
+                }
                 break;
 
             case FtcGamepad.GAMEPAD_B:
@@ -658,6 +662,10 @@ public class FtcTest extends FtcTeleOp
                     }
                     passToTeleOp = false;
                 }
+                else if (testChoices.test == Test.SUBSYSTEMS_TEST && robot.elevator !=null && pressed) {
+                    robot.elevator.setPositionPidParameters(DashboardParams.elevatorKp,DashboardParams.elevatorKi,DashboardParams.elevatorKd,0,DashboardParams.elevatorIZone,DashboardParams.elevatorTol);
+                    robot.elevator.presetPositionUp(moduleName, RobotParams.ELEVATOR_POWER_LIMIT);
+                }
                 break;
 
             case FtcGamepad.GAMEPAD_LBUMPER:
@@ -715,10 +723,6 @@ public class FtcTest extends FtcTeleOp
                         launchVelocity += RobotParams.LAUNCHER_VEL_STEP;
                         if (launchVelocity > RobotParams.LAUNCHER_MAX_VEL) launchVelocity = RobotParams.LAUNCHER_MAX_VEL;
                     }
-                }
-                else if (testChoices.test == Test.SUBSYSTEMS_TEST && robot.elevator !=null && pressed) {
-                    robot.elevator.setPositionPidParameters(DashboardParams.elevatorKp,DashboardParams.elevatorKi,DashboardParams.elevatorKd,0,DashboardParams.elevatorIZone,DashboardParams.elevatorTol);
-                    robot.elevator.presetPositionUp(moduleName, RobotParams.ELEVATOR_POWER_LIMIT);
                 }
                 break;
 
