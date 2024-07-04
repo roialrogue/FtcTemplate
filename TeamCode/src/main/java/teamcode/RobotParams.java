@@ -371,6 +371,12 @@ public class RobotParams
     public static final double ELEVATOR_OFFSET                  = 0;
     public static final double ELEVATOR_MIN                     = ELEVATOR_OFFSET;
     public static final double ELEVATOR_MAX                     = 1; //need to measure
+    public static final double ELEVATOR_POS_1                   = 12;
+    public static final double ELEVATOR_POS_2                  =24;
+
+    public static final double[] ELEVATOR_PRESETS = new double[] {
+            ELEVATOR_POS_1, ELEVATOR_POS_2
+    };
 
     //Power
     public static final double ELEVATOR_CAL_POWER = -0.25;
@@ -380,11 +386,11 @@ public class RobotParams
     public static final double ELEVATOR_STALL_TIMEOUT= 0.2;
     public static final double ELEVATOR_STALL_RESET_TIMEOUT= 0.0;
     // PID Actuator parameters.
-    public static final double ELEVATOR_KP                      = 0.6;
+    public static final double ELEVATOR_KP                      = 0.0;
     public static final double ELEVATOR_KI                      = 0.0;
-    public static final double ELEVATOR_KD                      = 0.025;
+    public static final double ELEVATOR_KD                      = 0.0;
     public static final double ELEVATOR_KF                      = 0.0;
-    public static final double ELEVATOR_TOLERANCE               = 0.5;
+    public static final double ELEVATOR_TOLERANCE               = 0.1;
     public static final double ELEVATOR_IZONE                   = 10.0;
     //
     //Wrist

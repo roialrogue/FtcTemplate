@@ -540,6 +540,7 @@ public class FtcTest extends FtcTeleOp
                     if (robot.launcher != null ) {
                         robot.dashboard.displayPrintf(lineNum++, "LauncherVelocity=" + robot.launcher.getLauncherRPM() + "/" + launchVelocity);
                     }
+                    break;
             }
         }
     }   //periodic
@@ -714,6 +715,9 @@ public class FtcTest extends FtcTeleOp
                         launchVelocity += RobotParams.LAUNCHER_VEL_STEP;
                         if (launchVelocity > RobotParams.LAUNCHER_MAX_VEL) launchVelocity = RobotParams.LAUNCHER_MAX_VEL;
                     }
+                }
+                else if (testChoices.test == Test.SUBSYSTEMS_TEST && robot.elevator !=null && pressed) {
+                    robot.elevator.presetPositionUp(moduleName, RobotParams.ELEVATOR_POWER_LIMIT);
                 }
                 break;
 
