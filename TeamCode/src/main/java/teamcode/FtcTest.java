@@ -717,6 +717,7 @@ public class FtcTest extends FtcTeleOp
                     }
                 }
                 else if (testChoices.test == Test.SUBSYSTEMS_TEST && robot.elevator !=null && pressed) {
+                    robot.elevator.setPositionPidParameters(DashboardParams.elevatorKp,DashboardParams.elevatorKi,DashboardParams.elevatorKd,0,DashboardParams.elevatorIZone,DashboardParams.elevatorTol);
                     robot.elevator.presetPositionUp(moduleName, RobotParams.ELEVATOR_POWER_LIMIT);
                 }
                 break;
