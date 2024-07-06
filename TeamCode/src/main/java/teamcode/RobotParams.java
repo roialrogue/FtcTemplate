@@ -358,14 +358,14 @@ public class RobotParams
     //
     // Elevator.java Subsystem
     //
-    public static final boolean ELEVATOR_MOTOR_INVERTED         = false;
+    public static final boolean ELEVATOR_MOTOR_INVERTED         = true;
     public static final boolean ELEVATOR_HAS_LOWER_LIMIT_SWITCH = false;
     public static final boolean ELEVATOR_LOWER_LIMIT_INVERTED   = false;
     public static final boolean ELEVATOR_HAS_UPPER_LIMIT_SWITCH = false;
     public static final boolean ELEVATOR_UPPER_LIMIT_INVERTED   = false;
     public static final boolean ELEVATOR_VOLTAGE_COMP_ENABLED   = true;
-    public static final double ELEVATOR_IN_ENCODER_READING      = 1; //need to measure
-    public static final double ELEVATOR_TICK_ENCODER_READING    = 1; //need to measure
+    public static final double ELEVATOR_IN_ENCODER_READING      = 34; //need to measure
+    public static final double ELEVATOR_TICK_ENCODER_READING    = 2691; //need to measure
     public static final double ELEVATOR_INCHES_PER_COUNT        = ELEVATOR_IN_ENCODER_READING/ELEVATOR_TICK_ENCODER_READING;
     public static final double ELEVATOR_POWER_LIMIT             = 1.0;
     public static final double ELEVATOR_OFFSET                  = 0;
@@ -400,8 +400,8 @@ public class RobotParams
     public static final double WRIST_UPDWON_BOARD               = 0.7;
     public static final double WRIST_UPDWON_GROUNDED            = 0.52;
     public static final double WRIST_UPDWON_BOARDINVERT         = 0.08;
-    public static final double WRIST_LEFTRIGHT_FLAT             = 0.05;
-    public static final double WRIST_LEFTRIGHT_INVERT           = 0.73;
+    public static final double WRIST_LEFTRIGHT_FLAT             = 0.73;
+    public static final double WRIST_LEFTRIGHT_INVERT           = 0.05;
     public static final double WRIST_SERVO_TIME                 = 0.40;
 
 

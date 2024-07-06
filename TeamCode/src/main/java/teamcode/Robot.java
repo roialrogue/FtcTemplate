@@ -157,7 +157,7 @@ public class Robot
                 if(RobotParams.Preferences.useElevator)
                 {
                     elevator = new Elevator().getElevator();
-                    hang.zeroCalibrate(RobotParams.ELEVATOR_CAL_POWER);
+                    elevator.zeroCalibrate(RobotParams.ELEVATOR_CAL_POWER);
                 }
             }
         }
@@ -334,7 +334,7 @@ public class Robot
             }
             if(elevator != null)
             {
-                dashboard.displayPrintf(lineNum++, "Elevator: power=" + elevator.getPower() + ", pos=" + elevator.getPosition() + "/" + elevator.getPidTarget());
+                dashboard.displayPrintf(lineNum++,"Elevator: power=" + elevator.getPower() + ", pos=" + elevator.getPosition() + "/" + elevator.getPidTarget());
             }
         }
     }   //updateStatus
