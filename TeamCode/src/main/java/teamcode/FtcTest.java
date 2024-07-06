@@ -599,9 +599,16 @@ public class FtcTest extends FtcTeleOp
                     }
                     passToTeleOp = false;
                 }
-                else if (testChoices.test == Test.SUBSYSTEMS_TEST && robot.elevator !=null && pressed) {
-                    robot.elevator.setPositionPidParameters(DashboardParams.elevatorKp,DashboardParams.elevatorKi,DashboardParams.elevatorKd,0,DashboardParams.elevatorIZone,DashboardParams.elevatorTol);
-                    robot.elevator.presetPositionDown(moduleName, RobotParams.ELEVATOR_POWER_LIMIT);
+                else if (testChoices.test == Test.SUBSYSTEMS_TEST && robot.elevator !=null) {
+                    if (pressed) {
+                        robot.elevator.setPositionPidParameters(
+                                DashboardParams.elevatorKp, DashboardParams.elevatorKi,
+                                DashboardParams.elevatorKd, 0.0,
+                                DashboardParams.elevatorIZone, DashboardParams.elevatorTol);
+                        robot.elevator.presetPositionDown(moduleName, RobotParams.ELEVATOR_POWER_LIMIT);
+                    }
+                    // This prevents the button event passing back to TeleOp. In effect, we are overriding the A button in TeleOp.
+                    passToTeleOp = false;
                 }
                 break;
 
@@ -662,9 +669,16 @@ public class FtcTest extends FtcTeleOp
                     }
                     passToTeleOp = false;
                 }
-                else if (testChoices.test == Test.SUBSYSTEMS_TEST && robot.elevator !=null && pressed) {
-                    robot.elevator.setPositionPidParameters(DashboardParams.elevatorKp,DashboardParams.elevatorKi,DashboardParams.elevatorKd,0,DashboardParams.elevatorIZone,DashboardParams.elevatorTol);
-                    robot.elevator.presetPositionUp(moduleName, RobotParams.ELEVATOR_POWER_LIMIT);
+                else if (testChoices.test == Test.SUBSYSTEMS_TEST && robot.elevator !=null) {
+                    if (pressed) {
+                        robot.elevator.setPositionPidParameters(
+                                DashboardParams.elevatorKp, DashboardParams.elevatorKi,
+                                DashboardParams.elevatorKd, 0.0,
+                                DashboardParams.elevatorIZone, DashboardParams.elevatorTol);
+                        robot.elevator.presetPositionUp(moduleName, RobotParams.ELEVATOR_POWER_LIMIT);
+                    }
+                    // This prevents the button event passing back to TeleOp. In effect, we are overriding the A button in TeleOp.
+                    passToTeleOp = false;
                 }
                 break;
 
