@@ -370,9 +370,9 @@ public class RobotParams
     public static final double ELEVATOR_POWER_LIMIT             = 1.0;
     public static final double ELEVATOR_OFFSET                  = 0;
     public static final double ELEVATOR_MIN                     = ELEVATOR_OFFSET;
-    public static final double ELEVATOR_MAX                     = 1; //need to measure
+    public static final double ELEVATOR_MAX                     = 34; //need to measure
     public static final double ELEVATOR_POS_1                   = 12;
-    public static final double ELEVATOR_POS_2                  =24;
+    public static final double ELEVATOR_POS_2                  = 24;
 
     public static final double[] ELEVATOR_PRESETS = new double[] {
             ELEVATOR_POS_1, ELEVATOR_POS_2

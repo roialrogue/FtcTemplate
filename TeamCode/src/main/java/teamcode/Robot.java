@@ -157,6 +157,7 @@ public class Robot
                 if(RobotParams.Preferences.useElevator)
                 {
                     elevator = new Elevator().getElevator();
+                    globalTracer.traceInfo("Robot", "Zero Calibrating Elevator...");
                     elevator.zeroCalibrate(RobotParams.ELEVATOR_CAL_POWER);
                 }
             }
