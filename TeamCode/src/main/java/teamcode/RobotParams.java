@@ -397,6 +397,7 @@ public class RobotParams
     //
     public static final boolean WRIST_UPDWON_INVERTED           = false;
     public static final boolean WRIST_LEFTRIGHT_INVERTED        = false;
+    public static final double WRIST_EDIT_ELEVATOR_HEIGHT       = 12;
     public static final double WRIST_UPDWON_BOARD               = 0.7;
     public static final double WRIST_UPDWON_GROUNDED            = 0.52;
     public static final double WRIST_UPDWON_BOARDINVERT         = 0.08;

@@ -50,6 +50,9 @@ public class FtcTeleOp extends FtcOpMode
     private double drivePowerScale = RobotParams.DRIVE_POWER_SCALE_NORMAL;
     private double turnPowerScale = RobotParams.TURN_POWER_SCALE_NORMAL;
     private double hangPrevPower = 0.0;
+    private double elevatorPrevPower = 0.0;
+    private boolean slowDrive = false;
+    private boolean wristPositionInverted = false;
     private double hangPos = RobotParams.HANG_MIN_POS;
     private boolean manualOverride = false;
     private boolean relocalizing = false;
@@ -218,6 +221,39 @@ public class FtcTeleOp extends FtcOpMode
                         hangPrevPower = hangPower;
                     }
                 }
+                //elevator subsystem
+                if(robot.elevator != null)
+                {
+                    double elevatorPower = operatorGamepad.getLeftStickY(true) * RobotParams.ELEVATOR_POWER_LIMIT;
+                    if(elevatorPower != elevatorPrevPower)
+                    {
+                        if (manualOverride)
+                        {
+                            robot.elevator.setPower(elevatorPower);
+                        }
+                        else
+                        {
+                            robot.elevator.setPidPower(null, elevatorPower, RobotParams.ELEVATOR_MIN,RobotParams.ELEVATOR_MAX, true);
+                        }
+                        elevatorPrevPower = elevatorPower;
+                    }
+                }
+
+
+                slowDrive = operatorGamepad.getLeftTrigger() >= .3;
+                // Press and hold for slow drive.
+                if (slowDrive)
+                {
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> DrivePower slow.");
+                        drivePowerScale = RobotParams.DRIVE_POWER_SCALE_SLOW;
+                        turnPowerScale = RobotParams.TURN_POWER_SCALE_SLOW;
+                }
+                else
+                {
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> DrivePower normal.");
+                        drivePowerScale = RobotParams.DRIVE_POWER_SCALE_NORMAL;
+                        turnPowerScale = RobotParams.TURN_POWER_SCALE_NORMAL;
+                }
 
             }
             // Display subsystem status.
@@ -265,162 +301,12 @@ public class FtcTeleOp extends FtcOpMode
         switch (button)
         {
             case FtcGamepad.GAMEPAD_A:
-                if (pressed)
-                {
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> CancelAll is pressed.");
-                    if (robot.robotDrive != null)
-                    {
-                        // Cancel all auto-assist driving.
-                        robot.robotDrive.cancel();
-                    }
-                    if (robot.hang != null)
-                    {
-                        robot.hang.cancel();
-                    }
-                }
                 break;
 
             case FtcGamepad.GAMEPAD_B:
                 break;
 
             case FtcGamepad.GAMEPAD_X:
-                break;
-
-            case FtcGamepad.GAMEPAD_Y:
-                if (pressed && robot.robotDrive != null)
-                {
-                    if (robot.robotDrive.driveBase.isGyroAssistEnabled())
-                    {
-                        // Disable GyroAssist drive.
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Disabling GyroAssist.");
-                        robot.robotDrive.driveBase.setGyroAssistEnabled(null);
-                    }
-                    else
-                    {
-                        // Enable GyroAssist drive.
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Enabling GyroAssist.");
-                        robot.robotDrive.driveBase.setGyroAssistEnabled(robot.robotDrive.pidDrive.getTurnPidCtrl());
-                    }
-                }
-                break;
-
-            case FtcGamepad.GAMEPAD_LBUMPER:
-                // Toggle between field or robot oriented driving, only applicable for holonomic drive base.
-                if (pressed && robot.robotDrive != null && robot.robotDrive.driveBase.supportsHolonomicDrive())
-                {
-                    if (robot.robotDrive.driveBase.getDriveOrientation() != TrcDriveBase.DriveOrientation.FIELD)
-                    {
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Enabling FIELD mode.");
-                        setDriveOrientation(TrcDriveBase.DriveOrientation.FIELD);
-                    }
-                    else
-                    {
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Enabling ROBOT mode.");
-                        setDriveOrientation(TrcDriveBase.DriveOrientation.ROBOT);
-                    }
-                }
-                break;
-
-            case FtcGamepad.GAMEPAD_RBUMPER:
-                // Press and hold for slow drive.
-                if (pressed)
-                {
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> DrivePower slow.");
-                    drivePowerScale = RobotParams.DRIVE_POWER_SCALE_SLOW;
-                    turnPowerScale = RobotParams.TURN_POWER_SCALE_SLOW;
-                }
-                else
-                {
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> DrivePower normal.");
-                    drivePowerScale = RobotParams.DRIVE_POWER_SCALE_NORMAL;
-                    turnPowerScale = RobotParams.TURN_POWER_SCALE_NORMAL;
-                }
-                break;
-
-            case FtcGamepad.GAMEPAD_DPAD_UP:
-                break;
-
-            case FtcGamepad.GAMEPAD_DPAD_DOWN:
-                break;
-
-            case FtcGamepad.GAMEPAD_DPAD_LEFT:
-                break;
-
-            case FtcGamepad.GAMEPAD_DPAD_RIGHT:
-                break;
-
-            case FtcGamepad.GAMEPAD_START:
-                if (robot.vision != null && robot.vision.aprilTagVision != null && robot.robotDrive != null)
-                {
-                    // On press of the button, we will start looking for AprilTag for re-localization.
-                    // On release of the button, we will set the robot's field location if we found the AprilTag.
-                    relocalizing = pressed;
-                    if (!pressed)
-                    {
-                        if (robotFieldPose != null)
-                        {
-                            // Vision found an AprilTag, set the new robot field location.
-                            robot.globalTracer.traceInfo(
-                                moduleName, ">>>>> Finish re-localizing: pose=" + robotFieldPose);
-                            robot.robotDrive.driveBase.setFieldPosition(robotFieldPose, false);
-                            robotFieldPose = null;
-                        }
-                    }
-                    else
-                    {
-                        robot.globalTracer.traceInfo(moduleName, ">>>>> Start re-localizing ...");
-                    }
-                }
-                break;
-
-            case FtcGamepad.GAMEPAD_BACK:
-                if (pressed && robot.robotDrive != null && robot.robotDrive instanceof SwerveDrive)
-                {
-                    // Drive base is a Swerve Drive, align all steering wheels forward.
-                    robot.globalTracer.traceInfo(moduleName, ">>>>> Set SteerAngle to zero.");
-                    ((SwerveDrive) robot.robotDrive).setSteerAngle(0.0, false, false);
-                }
-                break;
-        }
-    }   //driverButtonEvent
-
-    /**
-     * This method is called when operator gamepad button event is detected.
-     *
-     * @param gamepad specifies the game controller object that generated the event.
-     * @param button specifies the button ID that generates the event.
-     * @param pressed specifies true if the button is pressed, false otherwise.
-     */
-    public void operatorButtonEvent(TrcGameController gamepad, int button, boolean pressed)
-    {
-        robot.dashboard.displayPrintf(8, "%s: %04x->%s", gamepad, button, pressed? "Pressed": "Released");
-
-        switch (button)
-        {
-            case FtcGamepad.GAMEPAD_A:
-                if (pressed && robot.hang != null && TrcTimer.getModeElapsedTime() >= RobotParams.END_GAME_TIME) {
-                    if (hangPos == RobotParams.HANG_MIN_POS)
-                    {
-                        hangPos = RobotParams.HANG_SETUP_POS;
-                    }
-                    else if (hangPos == RobotParams.HANG_SETUP_POS)
-                    {
-                        hangPos = RobotParams.HANG_HANGING_POS;
-                    }
-                    else
-                    {
-                        hangPos = RobotParams.HANG_MIN_POS;
-                    }
-                    robot.hang.setPosition(moduleName, 0.0, hangPos, false, RobotParams.HANG_POWER_LIMIT, null, 0.0);
-                }
-                break;
-
-            case FtcGamepad.GAMEPAD_B:
-                break;
-
-            case FtcGamepad.GAMEPAD_X:
-                robot.globalTracer.traceInfo(moduleName, ">>>>> ManulOverride=" + pressed);
-                manualOverride = pressed;
                 break;
 
             case FtcGamepad.GAMEPAD_Y:
@@ -454,6 +340,140 @@ public class FtcTeleOp extends FtcOpMode
                     {
                         robot.intake.closeRight(null);
                     }
+                }
+                break;
+
+            case FtcGamepad.GAMEPAD_DPAD_UP:
+                // Toggle between field or robot oriented driving, only applicable for holonomic drive base.
+                if (pressed && robot.robotDrive != null && robot.robotDrive.driveBase.supportsHolonomicDrive())
+                {
+                    if (robot.robotDrive.driveBase.getDriveOrientation() != TrcDriveBase.DriveOrientation.FIELD)
+                    {
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Enabling FIELD mode.");
+                        setDriveOrientation(TrcDriveBase.DriveOrientation.FIELD);
+                    }
+                    else
+                    {
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Enabling ROBOT mode.");
+                        setDriveOrientation(TrcDriveBase.DriveOrientation.ROBOT);
+                    }
+                }
+                break;
+
+            case FtcGamepad.GAMEPAD_DPAD_DOWN:
+                if (pressed)
+                {
+                    robot.globalTracer.traceInfo(moduleName, ">>>>> CancelAll is pressed.");
+                    if (robot.robotDrive != null)
+                    {
+                        // Cancel all auto-assist driving.
+                        robot.robotDrive.cancel();
+                    }
+                    if (robot.hang != null)
+                    {
+                        robot.hang.cancel();
+                    }
+                }
+                break;
+
+            case FtcGamepad.GAMEPAD_DPAD_LEFT:
+                break;
+
+            case FtcGamepad.GAMEPAD_DPAD_RIGHT:
+                break;
+
+            case FtcGamepad.GAMEPAD_START:
+                if (robot.vision != null && robot.vision.aprilTagVision != null && robot.robotDrive != null)
+                {
+                    // On press of the button, we will start looking for AprilTag for re-localization.
+                    // On release of the button, we will set the robot's field location if we found the AprilTag.
+                    relocalizing = pressed;
+                    if (!pressed)
+                    {
+                        if (robotFieldPose != null)
+                        {
+                            // Vision found an AprilTag, set the new robot field location.
+                            robot.globalTracer.traceInfo(
+                                moduleName, ">>>>> Finish re-localizing: pose=" + robotFieldPose);
+                            robot.robotDrive.driveBase.setFieldPosition(robotFieldPose, false);
+                            robotFieldPose = null;
+                        }
+                    }
+                    else
+                    {
+                        robot.globalTracer.traceInfo(moduleName, ">>>>> Start re-localizing ...");
+                    }
+                }
+                break;
+
+            case FtcGamepad.GAMEPAD_BACK:
+                break;
+        }
+    }   //driverButtonEvent
+
+    /**
+     * This method is called when operator gamepad button event is detected.
+     *
+     * @param gamepad specifies the game controller object that generated the event.
+     * @param button specifies the button ID that generates the event.
+     * @param pressed specifies true if the button is pressed, false otherwise.
+     */
+    public void operatorButtonEvent(TrcGameController gamepad, int button, boolean pressed)
+    {
+        robot.dashboard.displayPrintf(8, "%s: %04x->%s", gamepad, button, pressed? "Pressed": "Released");
+
+        switch (button)
+        {
+            case FtcGamepad.GAMEPAD_A:
+                break;
+
+            case FtcGamepad.GAMEPAD_B:
+                robot.globalTracer.traceInfo(moduleName, ">>>>> ManulOverride=" + pressed);
+                manualOverride = pressed;
+                break;
+
+            case FtcGamepad.GAMEPAD_X:
+                break;
+
+            case FtcGamepad.GAMEPAD_Y:
+                break;
+
+            case FtcGamepad.GAMEPAD_LBUMPER:
+                if(pressed && robot.wirst != null)
+                {
+                    if(robot.elevator.getPosition() >= RobotParams.WRIST_EDIT_ELEVATOR_HEIGHT)
+                    {
+                        if (wristPositionInverted)
+                        {
+                            robot.wirst.wristUpInverted(null);
+                        }
+                        else
+                        {
+                            robot.wirst.wristUpSquare(null);
+                        }
+                    }
+                    else
+                    {
+                        robot.wirst.wristGround(null);
+                    }
+                }
+                break;
+
+            case FtcGamepad.GAMEPAD_RBUMPER:
+                if (pressed && robot.hang != null && TrcTimer.getModeElapsedTime() >= RobotParams.END_GAME_TIME) {
+                    if (hangPos == RobotParams.HANG_MIN_POS)
+                    {
+                        hangPos = RobotParams.HANG_SETUP_POS;
+                    }
+                    else if (hangPos == RobotParams.HANG_SETUP_POS)
+                    {
+                        hangPos = RobotParams.HANG_HANGING_POS;
+                    }
+                    else
+                    {
+                        hangPos = RobotParams.HANG_MIN_POS;
+                    }
+                    robot.hang.setPosition(moduleName, 0.0, hangPos, false, RobotParams.HANG_POWER_LIMIT, null, 0.0);
                 }
                 break;
 
