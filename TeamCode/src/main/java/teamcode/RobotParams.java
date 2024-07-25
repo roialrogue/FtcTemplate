@@ -364,19 +364,18 @@ public class RobotParams
     public static final boolean ELEVATOR_HAS_UPPER_LIMIT_SWITCH = false;
     public static final boolean ELEVATOR_UPPER_LIMIT_INVERTED   = false;
     public static final boolean ELEVATOR_VOLTAGE_COMP_ENABLED   = true;
-    public static final double ELEVATOR_IN_ENCODER_READING      = 34; //need to measure
-    public static final double ELEVATOR_TICK_ENCODER_READING    = 2691; //need to measure
-    public static final double ELEVATOR_INCHES_PER_COUNT        = ELEVATOR_IN_ENCODER_READING/ELEVATOR_TICK_ENCODER_READING;
+    public static final double ELEVATOR_INCHES_PER_COUNT        = 0;
     public static final double ELEVATOR_POWER_LIMIT             = 1.0;
     public static final double ELEVATOR_OFFSET                  = 0;
     public static final double ELEVATOR_MIN                     = ELEVATOR_OFFSET;
-    public static final double ELEVATOR_MAX                     = 34; //need to measure
+    public static final double ELEVATOR_MAX                     = 33.5; //need to measure
     public static final double ELEVATOR_POS_1                   = 12;
-    public static final double ELEVATOR_POS_2                  = 24;
+    public static final double ELEVATOR_POS_2                   = 24;
 
     public static final double[] ELEVATOR_PRESETS = new double[] {
             ELEVATOR_POS_1, ELEVATOR_POS_2
     };
+    public static final double ELEVATOR_PRESETS_TOLERANCE       = 1;
 
     //Power
     public static final double ELEVATOR_CAL_POWER = -0.25;
