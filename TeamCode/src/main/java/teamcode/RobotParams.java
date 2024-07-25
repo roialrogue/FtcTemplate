@@ -364,18 +364,19 @@ public class RobotParams
     public static final boolean ELEVATOR_HAS_UPPER_LIMIT_SWITCH = false;
     public static final boolean ELEVATOR_UPPER_LIMIT_INVERTED   = false;
     public static final boolean ELEVATOR_VOLTAGE_COMP_ENABLED   = true;
-    public static final double ELEVATOR_INCHES_PER_COUNT        = 0;
+    public static final double ELEVATOR_IN_ENCODER_READING      = 1; //need to measure
+    public static final double ELEVATOR_TICK_ENCODER_READING    = 1; //need to measure
+    public static final double ELEVATOR_INCHES_PER_COUNT        = ELEVATOR_IN_ENCODER_READING/ELEVATOR_TICK_ENCODER_READING;
     public static final double ELEVATOR_POWER_LIMIT             = 1.0;
     public static final double ELEVATOR_OFFSET                  = 0;
     public static final double ELEVATOR_MIN                     = ELEVATOR_OFFSET;
-    public static final double ELEVATOR_MAX                     = 33.5; //need to measure
+    public static final double ELEVATOR_MAX                     = 34; //need to measure
     public static final double ELEVATOR_POS_1                   = 12;
-    public static final double ELEVATOR_POS_2                   = 24;
+    public static final double ELEVATOR_POS_2                  = 24;
 
     public static final double[] ELEVATOR_PRESETS = new double[] {
             ELEVATOR_POS_1, ELEVATOR_POS_2
     };
-    public static final double ELEVATOR_PRESETS_TOLERANCE       = 1;
 
     //Power
     public static final double ELEVATOR_CAL_POWER = -0.25;
@@ -396,6 +397,7 @@ public class RobotParams
     //
     public static final boolean WRIST_UPDWON_INVERTED           = false;
     public static final boolean WRIST_LEFTRIGHT_INVERTED        = false;
+    public static final double WRIST_EDIT_ELEVATOR_HEIGHT       = 12;
     public static final double WRIST_UPDWON_BOARD               = 0.7;
     public static final double WRIST_UPDWON_GROUNDED            = 0.52;
     public static final double WRIST_UPDWON_BOARDINVERT         = 0.08;
