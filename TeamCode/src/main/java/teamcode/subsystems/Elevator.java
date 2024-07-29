@@ -22,7 +22,6 @@ public class Elevator {
                 .setPositionScaleAndOffset(RobotParams.ELEVATOR_INCHES_PER_COUNT, RobotParams.ELEVATOR_OFFSET)
                 .setPositionPresets(RobotParams.ELEVATOR_PRESETS_TOLERANCE, RobotParams.ELEVATOR_PRESETS);;
         elevator = new FtcMotorActuator(RobotParams.HWNAME_ELEVATOR, elevatorParams).getActuator();
-        elevator.setTraceLevel(TrcDbgTrace.MsgLevel.DEBUG, false,false,null);
         elevator.setSoftwarePidEnabled(true);
         elevator.setPositionPidParameters(
                 RobotParams.ELEVATOR_KP, RobotParams.ELEVATOR_KI, RobotParams.ELEVATOR_KD, RobotParams.ELEVATOR_KF,
