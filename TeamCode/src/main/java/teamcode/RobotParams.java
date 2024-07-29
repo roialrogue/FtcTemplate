@@ -364,34 +364,33 @@ public class RobotParams
     public static final boolean ELEVATOR_HAS_UPPER_LIMIT_SWITCH = false;
     public static final boolean ELEVATOR_UPPER_LIMIT_INVERTED   = false;
     public static final boolean ELEVATOR_VOLTAGE_COMP_ENABLED   = true;
-    public static final double ELEVATOR_IN_ENCODER_READING      = 1; //need to measure
-    public static final double ELEVATOR_TICK_ENCODER_READING    = 1; //need to measure
-    public static final double ELEVATOR_INCHES_PER_COUNT        = ELEVATOR_IN_ENCODER_READING/ELEVATOR_TICK_ENCODER_READING;
-    public static final double ELEVATOR_POWER_LIMIT             = 1.0;
-    public static final double ELEVATOR_OFFSET                  = 0;
+    public static final double ELEVATOR_POWER_LIMIT             = .8;
+    public static final double ELEVATOR_INCHES_PER_COUNT        = 23.8/2690;
+    public static final double ELEVATOR_OFFSET                  = 10.4;
     public static final double ELEVATOR_MIN                     = ELEVATOR_OFFSET;
-    public static final double ELEVATOR_MAX                     = 34; //need to measure
-    public static final double ELEVATOR_POS_1                   = 12;
-    public static final double ELEVATOR_POS_2                  = 24;
+    public static final double ELEVATOR_MAX                     = 34;
+    public static final double ELEVATOR_POS_1                   = 18;
+    public static final double ELEVATOR_POS_2                  = 28;
 
     public static final double[] ELEVATOR_PRESETS = new double[] {
             ELEVATOR_POS_1, ELEVATOR_POS_2
     };
+    public static final double ELEVATOR_PRESETS_TOLERANCE      = 1;
 
     //Power
-    public static final double ELEVATOR_CAL_POWER = -0.25;
+    public static final double ELEVATOR_CAL_POWER = -0.15;
     //Stall Protection
     public static final double ELEVATOR_STALL_MIN_POWER= Math.abs(ELEVATOR_CAL_POWER);
     public static final double ELEVATOR_STALL_TOLERANCE= 0.1;
     public static final double ELEVATOR_STALL_TIMEOUT= 0.2;
     public static final double ELEVATOR_STALL_RESET_TIMEOUT= 0.0;
     // PID Actuator parameters.
-    public static final double ELEVATOR_KP                      = 0.0;
-    public static final double ELEVATOR_KI                      = 0.0;
-    public static final double ELEVATOR_KD                      = 0.0;
+    public static final double ELEVATOR_KP                      = 0.85;
+    public static final double ELEVATOR_KI                      = 0.7;
+    public static final double ELEVATOR_KD                      = 0.025;
     public static final double ELEVATOR_KF                      = 0.0;
-    public static final double ELEVATOR_TOLERANCE               = 0.1;
-    public static final double ELEVATOR_IZONE                   = 10.0;
+    public static final double ELEVATOR_TOLERANCE               = 0.25;
+    public static final double ELEVATOR_IZONE                   = 1;
     //
     //Wrist
     //

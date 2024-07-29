@@ -334,7 +334,7 @@ public class Robot
             }
             if(elevator != null)
             {
-                dashboard.displayPrintf(lineNum++,"Elevator: power=" + elevator.getPower() + ", pos=" + elevator.getPosition() + "/" + elevator.getPidTarget());
+                dashboard.displayPrintf(lineNum++,"Elevator: power=" + elevator.getPower() + ", pos=" + elevator.getPosition() + "/" + elevator.getPidTarget() + ", Current" + elevator.getCurrent());
             }
         }
     }   //updateStatus

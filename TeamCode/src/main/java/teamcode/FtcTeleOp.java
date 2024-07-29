@@ -240,20 +240,21 @@ public class FtcTeleOp extends FtcOpMode
                 }
 
 
-                slowDrive = operatorGamepad.getLeftTrigger() >= .3;
+                boolean slowDriveTriggered = operatorGamepad.getLeftTrigger() >= .3;
                 // Press and hold for slow drive.
-                if (slowDrive)
+                if (!slowDrive && slowDriveTriggered)
                 {
                         robot.globalTracer.traceInfo(moduleName, ">>>>> DrivePower slow.");
                         drivePowerScale = RobotParams.DRIVE_POWER_SCALE_SLOW;
                         turnPowerScale = RobotParams.TURN_POWER_SCALE_SLOW;
                 }
-                else
+                else if(slowDrive && !slowDriveTriggered)
                 {
                         robot.globalTracer.traceInfo(moduleName, ">>>>> DrivePower normal.");
                         drivePowerScale = RobotParams.DRIVE_POWER_SCALE_NORMAL;
                         turnPowerScale = RobotParams.TURN_POWER_SCALE_NORMAL;
                 }
+                slowDrive = slowDriveTriggered;
 
             }
             // Display subsystem status.
