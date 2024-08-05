@@ -163,6 +163,7 @@ public class FtcTeleOp extends FtcOpMode
      * @param slowPeriodicLoop specifies true if it is running the slow periodic loop on the main robot thread,
      *        false otherwise.
      */
+
     @Override
     public void periodic(double elapsedTime, boolean slowPeriodicLoop)
     {
@@ -239,9 +240,25 @@ public class FtcTeleOp extends FtcOpMode
                         elevatorPrevPower = elevatorPower;
                     }
                 }
+                if(robot.wirst != null && robot.elevator != null)
+                {
+                    if (robot.elevator.getPosition() >= RobotParams.WRIST_EDIT_ELEVATOR_HEIGHT)
+                    {
+                        if (wristPositionInverted)
+                        {
+                            robot.wirst.wristUpInverted(null);
+                        } else
+                        {
+                            robot.wirst.wristUpSquare(null);
+                        }
+                    }
+                    else
+                    {
+                        robot.wirst.wristGround(null);
+                    }
+                }
 
-
-                boolean slowDriveTriggered = operatorGamepad.getLeftTrigger() >= .3;
+                boolean slowDriveTriggered = driverGamepad.getLeftTrigger() >= .3;
                 // Press and hold for slow drive.
                 if (!slowDrive && slowDriveTriggered)
                 {
@@ -435,33 +452,6 @@ public class FtcTeleOp extends FtcOpMode
                 break;
 
             case FtcGamepad.GAMEPAD_X:
-                break;
-
-            case FtcGamepad.GAMEPAD_Y:
-                break;
-
-            case FtcGamepad.GAMEPAD_LBUMPER:
-                if(pressed && robot.wirst != null)
-                {
-                    if(robot.elevator.getPosition() >= RobotParams.WRIST_EDIT_ELEVATOR_HEIGHT)
-                    {
-                        if (wristPositionInverted)
-                        {
-                            robot.wirst.wristUpInverted(null);
-                        }
-                        else
-                        {
-                            robot.wirst.wristUpSquare(null);
-                        }
-                    }
-                    else
-                    {
-                        robot.wirst.wristGround(null);
-                    }
-                }
-                break;
-
-            case FtcGamepad.GAMEPAD_RBUMPER:
                 if (pressed && robot.hang != null && TrcTimer.getModeElapsedTime() >= RobotParams.END_GAME_TIME) {
                     if (hangPos == RobotParams.HANG_MIN_POS)
                     {
@@ -476,6 +466,29 @@ public class FtcTeleOp extends FtcOpMode
                         hangPos = RobotParams.HANG_MIN_POS;
                     }
                     robot.hang.setPosition(moduleName, 0.0, hangPos, false, RobotParams.HANG_POWER_LIMIT, null, 0.0);
+                }
+                break;
+
+            case FtcGamepad.GAMEPAD_Y:
+                break;
+
+            case FtcGamepad.GAMEPAD_LBUMPER:
+               if(pressed && robot.wirst != null)
+               {
+                   if(wristPositionInverted) {
+                       wristPositionInverted = false;
+                   }
+                   else
+                   {
+                       wristPositionInverted = true;
+                   }
+               }
+                break;
+
+            case FtcGamepad.GAMEPAD_RBUMPER:
+                if(pressed && robot.elevator != null)
+                {
+                    robot.elevator.setPosition(RobotParams.ELEVATOR_MIN,false,RobotParams.ELEVATOR_POWER_LIMIT);
                 }
                 break;
 

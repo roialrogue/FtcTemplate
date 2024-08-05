@@ -250,9 +250,10 @@ public class RobotParams
     public static final boolean DRIVE_WHEEL_BRAKE_MODE_ON       = true;
     public static final double TURN_POWER_LIMIT                 = 0.5;
     public static final double DRIVE_POWER_SCALE_SLOW           = 0.5;
-    public static final double DRIVE_POWER_SCALE_NORMAL         = 1.0;
+    public static final double DRIVE_POWER_SCALE_NORMAL         = .8;
     public static final double TURN_POWER_SCALE_SLOW            = 0.5;
-    public static final double TURN_POWER_SCALE_NORMAL          = 1.0;
+    public static final double TURN_POWER_SCALE_NORMAL          = 0.8;
+
     // Optii Odometry Wheel:
     public static final double ODWHEEL_DIAMETER                 = 48 * TrcUtil.INCHES_PER_MM;
     public static final double ODWHEEL_CPR                      = 2000;
@@ -396,7 +397,7 @@ public class RobotParams
     //
     public static final boolean WRIST_UPDWON_INVERTED           = false;
     public static final boolean WRIST_LEFTRIGHT_INVERTED        = false;
-    public static final double WRIST_EDIT_ELEVATOR_HEIGHT       = 12;
+    public static final double WRIST_EDIT_ELEVATOR_HEIGHT       = 20;
     public static final double WRIST_UPDWON_BOARD               = 0.7;
     public static final double WRIST_UPDWON_GROUNDED            = 0.52;
     public static final double WRIST_UPDWON_BOARDINVERT         = 0.08;
