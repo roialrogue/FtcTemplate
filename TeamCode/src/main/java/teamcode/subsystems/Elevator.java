@@ -1,6 +1,5 @@
 package teamcode.subsystems;
 
-import TrcCommonLib.trclib.TrcDbgTrace;
 import TrcCommonLib.trclib.TrcMotor;
 import TrcFtcLib.ftclib.FtcMotorActuator;
 import teamcode.RobotParams;

@@ -239,6 +239,7 @@ public class Robot
         TrcMotor.setElapsedTimerEnabled(false);
         TrcServo.printElapsedTime(globalTracer);
         TrcServo.setElapsedTimerEnabled(false);
+
         //
         // Disable vision.
         //
