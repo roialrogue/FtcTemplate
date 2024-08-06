@@ -365,7 +365,8 @@ public class RobotParams
     public static final boolean ELEVATOR_HAS_UPPER_LIMIT_SWITCH = false;
     public static final boolean ELEVATOR_UPPER_LIMIT_INVERTED   = false;
     public static final boolean ELEVATOR_VOLTAGE_COMP_ENABLED   = true;
-    public static final double ELEVATOR_POWER_LIMIT             = .8;
+    public static final double ELEVATOR_POWER_LIMIT             = .7;
+    public static final double ELEVATOR_GRAVITY_COMP            = 0.0;
     public static final double ELEVATOR_INCHES_PER_COUNT        = 23.8/2690;
     public static final double ELEVATOR_OFFSET                  = 10.4;
     public static final double ELEVATOR_MIN                     = ELEVATOR_OFFSET;

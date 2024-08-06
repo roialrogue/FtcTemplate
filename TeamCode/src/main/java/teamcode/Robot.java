@@ -77,7 +77,7 @@ public class Robot
     public Intake intake;
     public AirplaneLauncher launcher;
     public TrcMotor hang;
-    public Wrist wirst;
+    public Wrist wrist;
     public TrcMotor elevator;
 
 
@@ -152,7 +152,7 @@ public class Robot
                 }
                 if(RobotParams.Preferences.useWrist)
                 {
-                    wirst = new Wrist(RobotParams.HWNAME_WRIST,this);
+                    wrist = new Wrist(RobotParams.HWNAME_WRIST,this);
                 }
                 if(RobotParams.Preferences.useElevator)
                 {
@@ -329,9 +329,9 @@ public class Robot
             {
                 dashboard.displayPrintf(lineNum++,"Hang: power=" + hang.getPower() + ", pos=" + hang.getPosition() + "/" + hang.getPidTarget());
             }
-            if(wirst != null)
+            if(wrist != null)
             {
-                dashboard.displayPrintf(lineNum++,"Wirst: servoLeftRightFlat="+ wirst.isWristLeftRightFlat() + ", servoUpDownPosition" + wirst.WirstUpDwonPosition());
+                dashboard.displayPrintf(lineNum++,"Wirst: servoLeftRightFlat="+ wrist.isWristLeftRightFlat() + ", servoUpDownPosition" + wrist.WirstUpDwonPosition());
             }
             if(elevator != null)
             {

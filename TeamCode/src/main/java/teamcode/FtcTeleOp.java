@@ -240,21 +240,21 @@ public class FtcTeleOp extends FtcOpMode
                         elevatorPrevPower = elevatorPower;
                     }
                 }
-                if(robot.wirst != null && robot.elevator != null)
+                if(robot.wrist != null && robot.elevator != null)
                 {
                     if (robot.elevator.getPosition() >= RobotParams.WRIST_EDIT_ELEVATOR_HEIGHT)
                     {
                         if (wristPositionInverted)
                         {
-                            robot.wirst.wristUpInverted(null);
+                            robot.wrist.wristUpInverted(null);
                         } else
                         {
-                            robot.wirst.wristUpSquare(null);
+                            robot.wrist.wristUpSquare(null);
                         }
                     }
                     else
                     {
-                        robot.wirst.wristGround(null);
+                        robot.wrist.wristGround(null);
                     }
                 }
 
@@ -473,17 +473,10 @@ public class FtcTeleOp extends FtcOpMode
                 break;
 
             case FtcGamepad.GAMEPAD_LBUMPER:
-               if(pressed && robot.wirst != null)
-               {
-                   if(wristPositionInverted) {
-                       wristPositionInverted = false;
-                   }
-                   else
-                   {
-                       wristPositionInverted = true;
-                   }
-               }
-                break;
+                if (pressed && robot.wrist != null)
+                {
+                    wristPositionInverted = !wristPositionInverted;
+                }
 
             case FtcGamepad.GAMEPAD_RBUMPER:
                 if(pressed && robot.elevator != null)
