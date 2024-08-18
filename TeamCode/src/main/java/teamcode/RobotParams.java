@@ -272,7 +272,7 @@ public class RobotParams
     public static final double DRIVE_MOTOR_MAX_VELOCITY_PPS     = GOBILDA_5203_312_MAX_VELOCITY_PPS;
 
     public static final TrcPidController.PidCoefficients xPosPidCoeff =
-        new TrcPidController.PidCoefficients(0.095, 0.0, 0.001, 0.0);
+        new TrcPidController.PidCoefficients(0.095, 0.0, 0.000, 0.0);
     public static final double XPOS_TOLERANCE                   = 1.0;
     public static final double XPOS_INCHES_PER_COUNT            = 0.01924724265461924299065420560748;
     public static final Double X_RAMP_RATE                      = null;//10.0;
@@ -296,8 +296,8 @@ public class RobotParams
     // max wheel speed = pi * wheel diameter * wheel gear ratio * motor RPM / 60.0
     // = 3.1415926535897932384626433832795 * 4 in. * 1.0 * 312.0 / 60.0
     // = 65.345127194667699360022982372214 in./sec.
-    public static final double ROBOT_MAX_VELOCITY               = 23.0;     // measured maximum from drive speed test.
-    public static final double ROBOT_MAX_ACCELERATION           = 500.0;    // measured maximum from drive speed test.
+    public static final double ROBOT_MAX_VELOCITY               = 25; // measured maximum from drive speed test.
+    public static final double ROBOT_MAX_ACCELERATION           = 500.0; // measured maximum from drive speed test.
     // KF should be set to the reciprocal of max tangential velocity (time to travel unit distance), units: sec./in.
     public static final TrcPidController.PidCoefficients velPidCoeff  =
         new TrcPidController.PidCoefficients(0.0, 0.0, 0.0, 1.0/ROBOT_MAX_VELOCITY);
