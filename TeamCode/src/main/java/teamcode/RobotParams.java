@@ -135,9 +135,9 @@ public class RobotParams
     //
     // Robot dimensions.
     //
-    public static final double ROBOT_LENGTH                     = 15.0;
-    public static final double ROBOT_WIDTH                      = 16.0;
-    public static final double DRIVE_BASE_LENGTH                = 246*TrcUtil.INCHES_PER_MM;
+    public static final double ROBOT_LENGTH                     = 360 * TrcUtil.INCHES_PER_MM;
+    public static final double ROBOT_WIDTH                      = 410 * TrcUtil.INCHES_PER_MM;
+    public static final double DRIVE_BASE_LENGTH                = 246 * TrcUtil.INCHES_PER_MM; //same
     public static final double DRIVE_BASE_WIDTH                 = 16.0; // need to be changed
     //
     // Game related locations.
