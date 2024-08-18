@@ -78,7 +78,8 @@ public class FtcTest extends FtcTeleOp
         TUNE_TURN_PID,
         PURE_PURSUIT_DRIVE,
         CALIBRATE_SWERVE_STEERING,
-        TUNE_LAUNCHER_VEL
+        TUNE_LAUNCHER_VEL,
+        TUNE_X_PID_TEST
     }   //enum Test
 
     /**
@@ -601,9 +602,9 @@ public class FtcTest extends FtcTeleOp
                 else if (testChoices.test == Test.SUBSYSTEMS_TEST && robot.elevator !=null) {
                     if (pressed) {
                         robot.elevator.setPositionPidParameters(
-                                DashboardParams.elevatorKp, DashboardParams.elevatorKi,
-                                DashboardParams.elevatorKd, 0.0,
-                                DashboardParams.elevatorIZone, DashboardParams.elevatorTol);
+                                DashboardParams.elevatorPID.elevatorKp, DashboardParams.elevatorPID.elevatorKi,
+                                DashboardParams.elevatorPID.elevatorKd, 0.0,
+                                DashboardParams.elevatorPID.elevatorIZone, DashboardParams.elevatorPID.elevatorTol);
                         robot.elevator.presetPositionDown(moduleName, RobotParams.ELEVATOR_POWER_LIMIT);
                     }
                     // This prevents the button event passing back to TeleOp. In effect, we are overriding the A button in TeleOp.
@@ -671,9 +672,9 @@ public class FtcTest extends FtcTeleOp
                 else if (testChoices.test == Test.SUBSYSTEMS_TEST && robot.elevator !=null) {
                     if (pressed) {
                         robot.elevator.setPositionPidParameters(
-                                DashboardParams.elevatorKp, DashboardParams.elevatorKi,
-                                DashboardParams.elevatorKd, 0.0,
-                                DashboardParams.elevatorIZone, DashboardParams.elevatorTol);
+                                DashboardParams.elevatorPID.elevatorKp, DashboardParams.elevatorPID.elevatorKi,
+                                DashboardParams.elevatorPID.elevatorKd, 0.0,
+                                DashboardParams.elevatorPID.elevatorIZone, DashboardParams.elevatorPID.elevatorTol);
                         robot.elevator.presetPositionUp(moduleName, RobotParams.ELEVATOR_POWER_LIMIT);
                     }
                     // This prevents the button event passing back to TeleOp. In effect, we are overriding the A button in TeleOp.
@@ -690,6 +691,11 @@ public class FtcTest extends FtcTeleOp
                         robot.vision.vision.setManualExposure(exposure, null);
                     }
                     passToTeleOp = false;
+                }
+                if (pressed && testChoices.test == Test.TUNE_X_PID_TEST && robot.robotDrive != null) {
+                    testCommand = new CmdPidDrive(
+                            robot.robotDrive.driveBase, robot.robotDrive.pidDrive, 0.0, 1,
+                            DashboardParams.driveTunePID.tuneXPidCoeff, new TrcPose2D(DashboardParams.driveTunePID.tuneDistance*12.0, 0.0, 0.0));
                 }
                 break;
 
