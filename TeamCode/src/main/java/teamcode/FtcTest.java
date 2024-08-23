@@ -46,6 +46,7 @@ import TrcFtcLib.ftclib.FtcGamepad;
 import TrcFtcLib.ftclib.FtcMenu;
 import TrcFtcLib.ftclib.FtcPidCoeffCache;
 import TrcFtcLib.ftclib.FtcValueMenu;
+import teamcode.autocommands.CmdMyPidDrive;
 import teamcode.drivebases.RobotDrive;
 import teamcode.drivebases.SwerveDrive;
 
@@ -79,7 +80,6 @@ public class FtcTest extends FtcTeleOp
         PURE_PURSUIT_DRIVE,
         CALIBRATE_SWERVE_STEERING,
         TUNE_LAUNCHER_VEL,
-        TUNE_X_PID_TEST
     }   //enum Test
 
     /**
@@ -143,6 +143,7 @@ public class FtcTest extends FtcTeleOp
     private WebcamName frontWebcam = null;
     private WebcamName rearWebcam = null;
     private boolean fpsMeterEnabled = false;
+    private boolean pathForward = false;
     //
     // Overrides FtcOpMode abstract method.
     //
@@ -205,37 +206,18 @@ public class FtcTest extends FtcTeleOp
                 {
                     // Distance targets are in feet, so convert them into inches.
                     testCommand = new CmdPidDrive(
-                        robot.robotDrive.driveBase, robot.robotDrive.pidDrive, 0.0, testChoices.drivePower, null,
-                        new TrcPose2D(testChoices.xTarget*12.0, testChoices.yTarget*12.0, testChoices.turnTarget));
+                            robot.robotDrive.driveBase, robot.robotDrive.pidDrive, 0.0, testChoices.drivePower, null,
+                            new TrcPose2D(testChoices.xTarget*12.0, testChoices.yTarget*12.0, testChoices.turnTarget));
                 }
                 break;
-
             case TUNE_X_PID:
-                if (robot.robotDrive != null)
-                {
-                    // Distance target is in feet, so convert it into inches.
-                    testCommand = new CmdPidDrive(
-                        robot.robotDrive.driveBase, robot.robotDrive.pidDrive, 0.0, testChoices.tuneDrivePower,
-                        testChoices.tunePidCoeff, new TrcPose2D(testChoices.tuneDistance*12.0, 0.0, 0.0));
-                }
-                break;
-
             case TUNE_Y_PID:
-                if (robot.robotDrive != null)
-                {
-                    // Distance target is in feet, so convert it into inches.
-                    testCommand = new CmdPidDrive(
-                        robot.robotDrive.driveBase, robot.robotDrive.pidDrive, 0.0, testChoices.tuneDrivePower,
-                        testChoices.tunePidCoeff, new TrcPose2D(0.0, testChoices.tuneDistance*12.0, 0.0));
-                }
-                break;
-
             case TUNE_TURN_PID:
-                if (robot.robotDrive != null)
+                if (robot.robotDrive != null &&
+                        (testChoices.test != Test.TUNE_X_PID || robot.robotDrive.driveBase.supportsHolonomicDrive()))
                 {
-                    testCommand = new CmdPidDrive(
-                        robot.robotDrive.driveBase, robot.robotDrive.pidDrive, 0.0, testChoices.tuneDrivePower,
-                        testChoices.tunePidCoeff, new TrcPose2D(0.0, 0.0, testChoices.tuneHeading));
+                    // Distance targets are in feet, so convert them into inches.
+                    testCommand = new CmdMyPidDrive(robot.robotDrive.driveBase, robot.robotDrive.pidDrive);
                 }
                 break;
         }
@@ -692,13 +674,6 @@ public class FtcTest extends FtcTeleOp
                     }
                     passToTeleOp = false;
                 }
-                if (pressed && testChoices.test == Test.TUNE_X_PID_TEST && robot.robotDrive != null) {
-                    testCommand = new CmdPidDrive(
-                            robot.robotDrive.driveBase, robot.robotDrive.pidDrive, 0.0, 1,
-                            DashboardParams.driveTunePID.tuneXPidCoeff, new TrcPose2D(DashboardParams.driveTunePID.tuneDistance*12.0, 0.0, 0.0));
-                }
-                break;
-
             case FtcGamepad.GAMEPAD_RBUMPER:
                 if (testChoices.test == Test.VISION_TEST && robot.vision != null)
                 {
@@ -709,8 +684,31 @@ public class FtcTest extends FtcTeleOp
                     }
                     passToTeleOp = false;
                 }
+                else if (robot.robotDrive != null &&
+                        (testChoices.test == Test.TUNE_Y_PID ||
+                        testChoices.test == Test.TUNE_X_PID ||
+                        testChoices.test == Test.TUNE_TURN_PID))
+                {
+                    if (pressed)
+                    {
+                        pathForward = !pathForward;
+                        double value = testChoices.test == Test.TUNE_TURN_PID ? DashboardParams.driveTunePID.tuneAngleDistance : DashboardParams.driveTunePID.tuneDistance;
+                        if(!pathForward) value = -value;
+                        switch (testChoices.test) {
+                            case TUNE_X_PID:
+                                ((CmdMyPidDrive)testCommand).start(0,DashboardParams.driveTunePID.powerLimit,DashboardParams.driveTunePID.tunePidCoeff, new TrcPose2D(value*12,0,0));
+                                break;
+                            case TUNE_Y_PID:
+                                ((CmdMyPidDrive)testCommand).start(0,DashboardParams.driveTunePID.powerLimit,DashboardParams.driveTunePID.tunePidCoeff, new TrcPose2D(0,value*12,0));
+                                break;
+                            case TUNE_TURN_PID:
+                                ((CmdMyPidDrive)testCommand).start(0,DashboardParams.driveTunePID.powerLimit,DashboardParams.driveTunePID.tunePidCoeff, new TrcPose2D(0,0,value));
+                                break;
+                        }
+                    }
+                    passToTeleOp = false;
+                }
                 break;
-
             case FtcGamepad.GAMEPAD_DPAD_UP:
                 if (testChoices.test == Test.SUBSYSTEMS_TEST)
                 {
@@ -949,7 +947,7 @@ public class FtcTest extends FtcTeleOp
         testMenu.addChoice("Y Timed drive", Test.Y_TIMED_DRIVE, false, driveTimeMenu);
         testMenu.addChoice("PID drive", Test.PID_DRIVE, false, xTargetMenu);
         testMenu.addChoice("Tune X PID", Test.TUNE_X_PID, false, tuneKpMenu);
-        testMenu.addChoice("Tune Y PID", Test.TUNE_Y_PID, false, tuneKpMenu);
+        testMenu.addChoice("Tune Y PID", Test.TUNE_Y_PID, false/*, tuneKpMenu*/);
         testMenu.addChoice("Tune Turn PID", Test.TUNE_TURN_PID, false, tuneKpMenu);
         testMenu.addChoice("Pure Pursuit Drive", Test.PURE_PURSUIT_DRIVE, false);
         testMenu.addChoice("Calibrate Swerve Steering", Test.CALIBRATE_SWERVE_STEERING, false);

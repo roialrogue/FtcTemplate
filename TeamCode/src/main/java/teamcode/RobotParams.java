@@ -136,9 +136,9 @@ public class RobotParams
     // Robot dimensions.
     //
     public static final double ROBOT_LENGTH                     = 360 * TrcUtil.INCHES_PER_MM;
-    public static final double ROBOT_WIDTH                      = 410 * TrcUtil.INCHES_PER_MM;
-    public static final double DRIVE_BASE_LENGTH                = 246 * TrcUtil.INCHES_PER_MM; //same
-    public static final double DRIVE_BASE_WIDTH                 = 16.0; // need to be changed
+    public static final double ROBOT_WIDTH                      = 414.35 * TrcUtil.INCHES_PER_MM;
+    public static final double DRIVE_BASE_LENGTH                = 226 * TrcUtil.INCHES_PER_MM; //same
+    public static final double DRIVE_BASE_WIDTH                 = 363.958;
     //
     // Game related locations.
     //
@@ -274,13 +274,13 @@ public class RobotParams
     public static final TrcPidController.PidCoefficients xPosPidCoeff =
         new TrcPidController.PidCoefficients(0.095, 0.0, 0.000, 0.0);
     public static final double XPOS_TOLERANCE                   = 1.0;
-    public static final double XPOS_INCHES_PER_COUNT            = 0.01924724265461924299065420560748;
+    public static final double XPOS_INCHES_PER_COUNT            = 1;
     public static final Double X_RAMP_RATE                      = null;//10.0;
 
     public static final TrcPidController.PidCoefficients yPosPidCoeff =
         new TrcPidController.PidCoefficients(0.06, 0.0, 0.002, 0.0);
     public static final double YPOS_TOLERANCE                   = 1.0;
-    public static final double YPOS_INCHES_PER_COUNT            = 0.02166184604662450653409090909091;
+    public static final double YPOS_INCHES_PER_COUNT            = 1;
     public static final Double Y_RAMP_RATE                      = null;//10.0;
 
     public static final TrcPidController.PidCoefficients turnPidCoeff =
