@@ -259,12 +259,12 @@ public class RobotParams
     public static final double ODWHEEL_CPR                      = 2000;
     public static final double ODWHEEL_INCHES_PER_COUNT         = Math.PI*ODWHEEL_DIAMETER/ODWHEEL_CPR;
     // Scale = 0.00105687652708656383937269814237 inches/count
-    public static final double YLEFT_ODWHEEL_X_OFFSET           = -144.0 * TrcUtil.INCHES_PER_MM;
-    public static final double YLEFT_ODWHEEL_Y_OFFSET           = -12.0 * TrcUtil.INCHES_PER_MM;
-    public static final double YRIGHT_ODWHEEL_X_OFFSET           = 144.0 * TrcUtil.INCHES_PER_MM;
-    public static final double YRIGHT_ODWHEEL_Y_OFFSET          = -12.0 * TrcUtil.INCHES_PER_MM;
-    public static final double X_ODWHEEL_X_OFFSET               = -116.695 * TrcUtil.INCHES_PER_MM;
-    public static final double X_ODWHEEL_Y_OFFSET               = -44.7 * TrcUtil.INCHES_PER_MM;
+    public static final double YLEFT_ODWHEEL_X_OFFSET           = -184 * TrcUtil.INCHES_PER_MM;
+    public static final double YLEFT_ODWHEEL_Y_OFFSET           = 8.527 * TrcUtil.INCHES_PER_MM;
+    public static final double YRIGHT_ODWHEEL_X_OFFSET          = 184.00 * TrcUtil.INCHES_PER_MM;
+    public static final double YRIGHT_ODWHEEL_Y_OFFSET          = 8.527  * TrcUtil.INCHES_PER_MM;
+    public static final double X_ODWHEEL_X_OFFSET               = 7.411 * TrcUtil.INCHES_PER_MM;
+    public static final double X_ODWHEEL_Y_OFFSET               = -117.508 * TrcUtil.INCHES_PER_MM;
     public static final FtcGamepad.DriveMode ROBOT_DRIVE_MODE   = FtcGamepad.DriveMode.ARCADE_MODE;
     //
     // Velocity controlled constants.
