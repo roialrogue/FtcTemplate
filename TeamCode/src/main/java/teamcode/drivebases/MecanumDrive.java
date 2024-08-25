@@ -52,13 +52,13 @@ public class MecanumDrive extends RobotDrive
             // odometry.
             TrcOdometryWheels driveBaseOdometry = new TrcOdometryWheels(
                 new TrcOdometryWheels.AxisSensor(
-                    driveMotors[INDEX_RIGHT_BACK], RobotParams.X_ODWHEEL_Y_OFFSET, RobotParams.X_ODWHEEL_X_OFFSET),
+                    driveMotors[INDEX_RIGHT_FRONT], RobotParams.X_ODWHEEL_Y_OFFSET, RobotParams.X_ODWHEEL_X_OFFSET),
                 new TrcOdometryWheels.AxisSensor[] {
                     new TrcOdometryWheels.AxisSensor(
                         driveMotors[INDEX_LEFT_FRONT], RobotParams.YLEFT_ODWHEEL_X_OFFSET,
                         RobotParams.YLEFT_ODWHEEL_Y_OFFSET),
                     new TrcOdometryWheels.AxisSensor(
-                        driveMotors[INDEX_RIGHT_FRONT], RobotParams.YRIGHT_ODWHEEL_X_OFFSET,
+                        driveMotors[INDEX_RIGHT_BACK], RobotParams.YRIGHT_ODWHEEL_X_OFFSET,
                         RobotParams.YRIGHT_ODWHEEL_Y_OFFSET)},
                 gyro);
             // Set the drive base to use the external odometry device overriding the built-in one.

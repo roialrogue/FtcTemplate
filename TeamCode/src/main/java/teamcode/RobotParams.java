@@ -103,10 +103,10 @@ public class RobotParams
     public static final String HWNAME_WEBCAM2                   = "Webcam 2";
     public static final String HWNAME_BLINKIN                   = "blinkin";
     // Drive Base.
-    public static final String HWNAME_LFDRIVE_MOTOR             = "CM0";
-    public static final String HWNAME_RFDRIVE_MOTOR             = "CM2";
-    public static final String HWNAME_LBDRIVE_MOTOR             = "CM1";
-    public static final String HWNAME_RBDRIVE_MOTOR             = "CM3";
+    public static final String HWNAME_LFDRIVE_MOTOR             = "lfdrivemotor";
+    public static final String HWNAME_RFDRIVE_MOTOR             = "rfdrivemotor";
+    public static final String HWNAME_LBDRIVE_MOTOR             = "lbdrivemotor";
+    public static final String HWNAME_RBDRIVE_MOTOR             = "rbdrivemotor";
     public static final String HWNAME_LFSTEER_SERVO             = "lfSteerServo";
     public static final String HWNAME_RFSTEER_SERVO             = "rfSteerServo";
     public static final String HWNAME_LBSTEER_SERVO             = "lbSteerServo";
@@ -226,7 +226,7 @@ public class RobotParams
     //
     // DriveBase subsystem.
     //
-    public static DriveOrientation DEF_DRIVE_ORIENTATION        = DriveOrientation.FIELD;
+    public static DriveOrientation DEF_DRIVE_ORIENTATION        = DriveOrientation.ROBOT;
     public static final double LFSTEER_ZERO_POS                 = 0.474812;
     public static final double RFSTEER_ZERO_POS                 = 0.467663;
     public static final double LBSTEER_ZERO_POS                 = 0.541338;

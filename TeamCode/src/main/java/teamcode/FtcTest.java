@@ -946,9 +946,9 @@ public class FtcTest extends FtcTeleOp
         testMenu.addChoice("X Timed drive", Test.X_TIMED_DRIVE, false, driveTimeMenu);
         testMenu.addChoice("Y Timed drive", Test.Y_TIMED_DRIVE, false, driveTimeMenu);
         testMenu.addChoice("PID drive", Test.PID_DRIVE, false, xTargetMenu);
-        testMenu.addChoice("Tune X PID", Test.TUNE_X_PID, false, tuneKpMenu);
-        testMenu.addChoice("Tune Y PID", Test.TUNE_Y_PID, false/*, tuneKpMenu*/);
-        testMenu.addChoice("Tune Turn PID", Test.TUNE_TURN_PID, false, tuneKpMenu);
+        testMenu.addChoice("Tune X PID", Test.TUNE_X_PID, false);
+        testMenu.addChoice("Tune Y PID", Test.TUNE_Y_PID, false);
+        testMenu.addChoice("Tune Turn PID", Test.TUNE_TURN_PID, false);
         testMenu.addChoice("Pure Pursuit Drive", Test.PURE_PURSUIT_DRIVE, false);
         testMenu.addChoice("Calibrate Swerve Steering", Test.CALIBRATE_SWERVE_STEERING, false);
         testMenu.addChoice("Tune Launcher Velocity", Test.TUNE_LAUNCHER_VEL, false);
