@@ -232,9 +232,9 @@ public class RobotParams
     public static final double LBSTEER_ZERO_POS                 = 0.541338;
     public static final double RBSTEER_ZERO_POS                 = 0.545340;
 
-    public static final boolean LFDRIVE_INVERTED                = false;
+    public static final boolean LFDRIVE_INVERTED                = true;
     public static final boolean RFDRIVE_INVERTED                = false;
-    public static final boolean LBDRIVE_INVERTED                = true;
+    public static final boolean LBDRIVE_INVERTED                = false;
     public static final boolean RBDRIVE_INVERTED                = true;
     public static final boolean LFSTEER_INVERTED                = true;
     public static final boolean RFSTEER_INVERTED                = true;
