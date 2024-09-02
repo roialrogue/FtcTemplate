@@ -16,9 +16,9 @@ public class DashboardParams
     @Config
     public static class driveTunePID {
 
-        public static double tuneDistance = 0;
-        public static double tuneAngleDistance = 0;
-        public static double powerLimit = 0;
+        public static double tuneDistance = 8;
+        public static double tuneAngleDistance = 90;
+        public static double powerLimit = 0.7;
 
         public static TrcPidController.PidCoefficients tunePidCoeff = new TrcPidController.PidCoefficients(1, 0.0, 0, 0);
     }

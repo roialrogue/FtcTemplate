@@ -272,19 +272,19 @@ public class RobotParams
     public static final double DRIVE_MOTOR_MAX_VELOCITY_PPS     = GOBILDA_5203_312_MAX_VELOCITY_PPS;
 
     public static final TrcPidController.PidCoefficients xPosPidCoeff =
-        new TrcPidController.PidCoefficients(0.095, 0.0, 0.000, 0.0);
-    public static final double XPOS_TOLERANCE                   = 1.0;
+        new TrcPidController.PidCoefficients(0.1, 0.0, 0.000, 0.0);
+    public static final double XPOS_TOLERANCE                   = 1;
     public static final double XPOS_INCHES_PER_COUNT            = 1;
     public static final Double X_RAMP_RATE                      = null;//10.0;
 
     public static final TrcPidController.PidCoefficients yPosPidCoeff =
-        new TrcPidController.PidCoefficients(0.06, 0.0, 0.002, 0.0);
-    public static final double YPOS_TOLERANCE                   = 1.0;
-    public static final double YPOS_INCHES_PER_COUNT            = 1;
+        new TrcPidController.PidCoefficients(0.1, 0.0, 0.00, 0.0);
+    public static final double YPOS_TOLERANCE                   = 1;
+    public static final double YPOS_INCHES_PER_COUNT            = 0.979209446;
     public static final Double Y_RAMP_RATE                      = null;//10.0;
 
     public static final TrcPidController.PidCoefficients turnPidCoeff =
-        new TrcPidController.PidCoefficients(0.02, 0.08, 0.003, 0.0, 30.0);
+        new TrcPidController.PidCoefficients(0.01, 0.00, 0.00, 0.00, 0.00);
     public static final double TURN_TOLERANCE                   = 1.0;
     public static final Double TURN_RAMP_RATE                   = null;//10.0;
     //
